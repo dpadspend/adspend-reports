@@ -437,6 +437,11 @@
         </div>
     </header>
 
+    <!-- Mobile hamburger button - OUTSIDE nav to avoid stacking context issues -->
+    <button class="mobile-menu-btn" onclick="document.querySelector('.nav-container').classList.toggle('mobile-open')">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+
     <!-- Navigation -->
     <nav class="nav-bar sticky top-[56px] md:top-[104px] z-40">
         <div class="nav-container">
@@ -470,10 +475,6 @@
                 </a>
             </div>
         </div>
-        <!-- Mobile hamburger button -->
-        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-container').classList.toggle('mobile-open')">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
