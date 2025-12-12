@@ -106,7 +106,7 @@
             position: fixed;
             top: 12px;
             right: 12px;
-            z-index: 100;
+            z-index: 10000;
         }
         .mobile-menu-btn svg {
             width: 28px;
@@ -154,15 +154,16 @@
                 display: none;
                 flex-direction: column;
                 position: fixed;
-                top: 70px;
-                left: 12px;
-                right: 12px;
-                background: #2d2d2d;
-                border: 1px solid rgba(220, 15, 15, 0.3);
-                border-radius: 12px;
-                padding: 12px 0;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-                z-index: 99;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(17, 17, 17, 0.98);
+                border: none;
+                border-radius: 0;
+                padding: 80px 20px 20px;
+                box-shadow: none;
+                z-index: 9999;
             }
             .nav-container.mobile-open {
                 display: flex;
@@ -175,15 +176,18 @@
             }
             .nav-item {
                 display: block;
-                padding: 12px 20px;
-                font-size: 14px;
-                text-align: left;
+                padding: 18px 24px;
+                font-size: 20px;
+                font-weight: 600;
+                text-align: center;
                 width: 100%;
+                border-radius: 12px;
+                margin-bottom: 8px;
             }
             .nav-badge {
-                font-size: 10px;
-                padding: 2px 6px;
-                margin-left: 8px;
+                font-size: 12px;
+                padding: 4px 10px;
+                margin-left: 10px;
             }
             .stat-card {
                 padding: 12px;
@@ -426,7 +430,7 @@
                     <p class="text-xs md:text-base text-gray-400 text-center">Comprehensive Security & Architecture Review</p>
                 </div>
                 <div class="header-badges flex items-center gap-3">
-                    <span class="px-2.5 py-1 bg-[#0769f5]/20 text-blue-300 rounded text-xs font-medium border border-[#0769f5]/40">v1.1.1</span>
+                    <span class="px-2.5 py-1 bg-[#0769f5]/20 text-blue-300 rounded text-xs font-medium border border-[#0769f5]/40">v1.1.2</span>
                     <span class="px-2.5 py-1 bg-gray-500/20 text-gray-300 rounded text-xs font-medium border border-gray-500/30">Dec 11, 2025</span>
                     <a href="/api/logout" class="px-2.5 py-1 bg-red-600/20 text-red-300 rounded text-xs font-medium border border-red-500/40 hover:bg-red-600/40 transition-colors cursor-pointer flex items-center gap-1">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
