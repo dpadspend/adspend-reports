@@ -1,0 +1,714 @@
+<!-- Tech Stack Tab Content -->
+<div class="mb-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-2">Complete Tech Stack</h2>
+    <p class="text-gray-600">90+ packages, 194 components, 158 API routes, 7 integrations - Full system architecture</p>
+</div>
+
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+    <div class="stat-card">
+        <div class="stat-value">158</div>
+        <div class="text-sm text-gray-600 font-medium">API Routes</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">194</div>
+        <div class="text-sm text-gray-600 font-medium">Components</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">99</div>
+        <div class="text-sm text-gray-600 font-medium">Migrations</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">500+</div>
+        <div class="text-sm text-gray-600 font-medium">TS Files</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">70</div>
+        <div class="text-sm text-gray-600 font-medium">Dependencies</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">15</div>
+        <div class="text-sm text-gray-600 font-medium">Test Suites</div>
+    </div>
+</div>
+
+<!-- Core Framework -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-blue-50 to-white">
+        <h3 class="text-lg font-bold text-blue-800">Core Framework & Runtime</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="p-4 bg-gray-900 rounded-lg text-white">
+                <div class="text-xs text-gray-400 uppercase mb-1">Runtime</div>
+                <div class="font-bold text-lg">Next.js 15.5.4</div>
+                <div class="text-sm text-gray-400">App Router + Turbopack</div>
+            </div>
+            <div class="p-4 bg-blue-600 rounded-lg text-white">
+                <div class="text-xs text-blue-200 uppercase mb-1">UI Library</div>
+                <div class="font-bold text-lg">React 19.0.0</div>
+                <div class="text-sm text-blue-200">Concurrent features</div>
+            </div>
+            <div class="p-4 bg-blue-800 rounded-lg text-white">
+                <div class="text-xs text-blue-300 uppercase mb-1">Language</div>
+                <div class="font-bold text-lg">TypeScript 5</div>
+                <div class="text-sm text-blue-300">Strict mode</div>
+            </div>
+            <div class="p-4 bg-emerald-600 rounded-lg text-white">
+                <div class="text-xs text-emerald-200 uppercase mb-1">Node</div>
+                <div class="font-bold text-lg">22.x (LTS)</div>
+                <div class="text-sm text-emerald-200">Vercel runtime</div>
+            </div>
+        </div>
+        <table class="text-sm">
+            <thead><tr><th>Package</th><th>Version</th><th>Purpose</th><th>Key Files</th></tr></thead>
+            <tbody>
+                <tr><td class="font-mono">next</td><td>^15.5.4</td><td>Full-stack React framework with App Router, RSC, streaming</td><td class="text-xs text-gray-500">next.config.ts, middleware.ts</td></tr>
+                <tr><td class="font-mono">react / react-dom</td><td>^19.0.0</td><td>UI library with concurrent rendering, Suspense</td><td class="text-xs text-gray-500">All components</td></tr>
+                <tr><td class="font-mono">typescript</td><td>^5</td><td>Type-safe JavaScript with strict mode enabled</td><td class="text-xs text-gray-500">tsconfig.json, /types/</td></tr>
+                <tr><td class="font-mono">next-themes</td><td>^0.4.6</td><td>Dark/light mode theming with system preference</td><td class="text-xs text-gray-500">ThemeProvider</td></tr>
+            </tbody>
+        </table>
+
+        <!-- Project Structure -->
+        <div class="mt-6 pt-6 border-t border-gray-200">
+            <h4 class="font-semibold mb-3 text-gray-800">Project Structure (Detailed)</h4>
+            <div class="code-block text-xs">
+src/
+├── app/                          <span class="text-blue-400"># Next.js App Router (42 route dirs)</span>
+│   ├── api/                      <span class="text-green-400"># 158 API routes</span>
+│   │   ├── admin/                <span class="text-gray-500"># User mgmt, settings, impersonation (15+)</span>
+│   │   ├── ai-agents/            <span class="text-gray-500"># CRUD, versions, context, search (12)</span>
+│   │   ├── chat/                 <span class="text-gray-500"># Streaming completion routes (4)</span>
+│   │   ├── conversations/        <span class="text-gray-500"># CRUD, messages, titles (8)</span>
+│   │   ├── knowledge/            <span class="text-gray-500"># Upload, process, search, crawl (16)</span>
+│   │   ├── meta/                 <span class="text-gray-500"># OAuth, accounts, campaigns (9)</span>
+│   │   ├── google-ads/           <span class="text-gray-500"># OAuth, campaigns, keywords (8)</span>
+│   │   ├── offers/               <span class="text-gray-500"># CRUD, generate, enhance (14)</span>
+│   │   ├── subscriptions/        <span class="text-gray-500"># Checkout, portal, credits (7)</span>
+│   │   ├── webhooks/             <span class="text-gray-500"># Stripe webhooks</span>
+│   │   └── rag/                  <span class="text-gray-500"># RAG search endpoint</span>
+│   ├── (auth)/                   <span class="text-gray-500"># login, signup, reset-password</span>
+│   ├── admin/                    <span class="text-gray-500"># Admin dashboard pages</span>
+│   ├── copywriter/               <span class="text-gray-500"># AI copywriting interface</span>
+│   ├── offers/                   <span class="text-gray-500"># 8P offer wizard</span>
+│   └── settings/                 <span class="text-gray-500"># User settings</span>
+├── components/                   <span class="text-green-400"># 194 React components</span>
+│   ├── ui/                       <span class="text-gray-500"># 39 shadcn/ui base components</span>
+│   ├── offers/                   <span class="text-gray-500"># 49 offer wizard components</span>
+│   ├── chat/                     <span class="text-gray-500"># 15 chat UI (messages, sidebar, input)</span>
+│   ├── auth/                     <span class="text-gray-500"># 12 auth forms and guards</span>
+│   ├── admin/                    <span class="text-gray-500"># Admin panel components</span>
+│   ├── knowledge/                <span class="text-gray-500"># Knowledge base UI</span>
+│   └── layout/                   <span class="text-gray-500"># Header, sidebar, navigation</span>
+├── contexts/                     <span class="text-purple-400"># React Context providers (4)</span>
+│   ├── AuthContext.tsx           <span class="text-gray-500"># User session, auth state</span>
+│   ├── BusinessContext.tsx       <span class="text-gray-500"># Company profile</span>
+│   ├── NavigationContext.tsx     <span class="text-gray-500"># Sidebar state</span>
+│   └── CopywriterContext.tsx     <span class="text-gray-500"># AI agent selection</span>
+├── hooks/                        <span class="text-cyan-400"># Custom React hooks (20+)</span>
+│   ├── useVoiceInput.ts          <span class="text-gray-500"># AssemblyAI voice recording</span>
+│   ├── useConversations.ts       <span class="text-gray-500"># Conversation management</span>
+│   ├── useAgents.ts              <span class="text-gray-500"># AI agent selection</span>
+│   ├── useCopywriterAI.ts        <span class="text-gray-500"># Copywriter chat hook</span>
+│   └── useConversationMemory.ts  <span class="text-gray-500"># Context window management</span>
+├── lib/                          <span class="text-blue-400"># Core libraries & services</span>
+│   ├── ai/                       <span class="text-gray-500"># router.ts, providers.ts, models.ts</span>
+│   ├── services/                 <span class="text-gray-500"># rag-service, credits-service, etc.</span>
+│   ├── stores/                   <span class="text-gray-500"># chat-store.ts (Zustand)</span>
+│   ├── supabase/                 <span class="text-gray-500"># server.ts, client.ts, middleware.ts</span>
+│   ├── meta/                     <span class="text-gray-500"># Meta Ads API client</span>
+│   ├── google-ads/               <span class="text-gray-500"># Google Ads API client</span>
+│   ├── rag/                      <span class="text-gray-500"># retriever.ts, chunker.ts</span>
+│   ├── knowledge/                <span class="text-gray-500"># batch-processor.ts</span>
+│   ├── embeddings/               <span class="text-gray-500"># generator.ts</span>
+│   ├── memory/                   <span class="text-gray-500"># conversationSummarizer.ts</span>
+│   └── utils/                    <span class="text-gray-500"># db-helpers, offer-version, etc.</span>
+├── types/                        <span class="text-gray-500"># 22 TypeScript definitions</span>
+│   ├── database.types.ts         <span class="text-gray-500"># Supabase generated types</span>
+│   ├── agents.ts                 <span class="text-gray-500"># AI agent interfaces</span>
+│   ├── knowledge.ts              <span class="text-gray-500"># Knowledge base types</span>
+│   ├── offers-v2.ts              <span class="text-gray-500"># V2 offer schema</span>
+│   └── api.ts                    <span class="text-gray-500"># API response types</span>
+├── services/                     <span class="text-gray-500"># Business logic layer</span>
+│   └── conversations.service.ts  <span class="text-gray-500"># Conversation CRUD</span>
+└── middleware.ts                 <span class="text-yellow-400"># Auth protection, admin bypass</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI & LLM Stack -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-purple-50 to-white">
+        <h3 class="text-lg font-bold text-purple-800">AI & LLM Integration (3 Providers, 9 Models)</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+                <h4 class="font-semibold mb-3">Vercel AI SDK (Unified Interface)</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-4">ai</td><td>^5.0.59</td><td class="text-gray-500">Core SDK - streaming, tool calls</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">@ai-sdk/react</td><td>^2.0.59</td><td class="text-gray-500">useChat, useCompletion hooks</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">@ai-sdk/openai</td><td>^2.0.42</td><td class="text-gray-500">OpenAI provider adapter</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">@ai-sdk/anthropic</td><td>^2.0.18</td><td class="text-gray-500">Anthropic provider adapter</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">@ai-sdk/google</td><td>^2.0.5</td><td class="text-gray-500">Google Gemini adapter</td></tr>
+                </table>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-3">Direct Provider SDKs</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-4">openai</td><td>^5.19.1</td><td class="text-gray-500">Embeddings (ada-002), chat</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">@anthropic-ai/sdk</td><td>^0.61.0</td><td class="text-gray-500">Claude models direct</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">@google/generative-ai</td><td>^0.24.1</td><td class="text-gray-500">Gemini API direct</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">tiktoken</td><td>^1.0.22</td><td class="text-gray-500">Token counting</td></tr>
+                </table>
+            </div>
+        </div>
+        <h4 class="font-semibold mb-3">Model Routing Matrix</h4>
+        <table class="text-sm">
+            <thead>
+                <tr><th>Provider</th><th>Fast (cheap)</th><th>Balanced (default)</th><th>Powerful (expensive)</th><th>Use Case</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="font-medium text-green-700">OpenAI</td>
+                    <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gpt-4o-mini</code></td>
+                    <td><code class="text-xs bg-green-100 px-2 py-1 rounded text-green-800">gpt-4o</code></td>
+                    <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gpt-4o</code></td>
+                    <td class="text-xs text-gray-500">Copywriting, generation</td>
+                </tr>
+                <tr>
+                    <td class="font-medium text-purple-700">Anthropic</td>
+                    <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">claude-3-haiku</code></td>
+                    <td><code class="text-xs bg-purple-100 px-2 py-1 rounded text-purple-800">claude-sonnet-4.5</code></td>
+                    <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">claude-3-opus</code></td>
+                    <td class="text-xs text-gray-500">Complex reasoning</td>
+                </tr>
+                <tr>
+                    <td class="font-medium text-blue-700">Google</td>
+                    <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gemini-2.5-flash-lite</code></td>
+                    <td><code class="text-xs bg-blue-100 px-2 py-1 rounded text-blue-800">gemini-2.5-flash</code></td>
+                    <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gemini-2.5-pro</code></td>
+                    <td class="text-xs text-gray-500">Multimodal, speed</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-4 text-xs text-gray-500">
+            <strong>Key files:</strong> /src/lib/ai/router.ts (model selection), /src/lib/ai/providers.ts (provider config), /src/app/api/chat/route.ts (streaming)
+        </div>
+    </div>
+</div>
+
+<!-- RAG & Knowledge Pipeline -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-orange-50 to-white">
+        <h3 class="text-lg font-bold text-orange-800">RAG & Knowledge Pipeline</h3>
+    </div>
+    <div class="p-6">
+        <div class="flex flex-wrap items-center justify-center gap-2 text-xs mb-6">
+            <span class="px-3 py-2 bg-blue-100 text-blue-800 rounded-lg font-medium">PDF/DOCX/YouTube/URL</span>
+            <span class="text-gray-400">→</span>
+            <span class="px-3 py-2 bg-purple-100 text-purple-800 rounded-lg font-medium">Extract & Clean</span>
+            <span class="text-gray-400">→</span>
+            <span class="px-3 py-2 bg-cyan-100 text-cyan-800 rounded-lg font-medium">Chunk (2000 chars)</span>
+            <span class="text-gray-400">→</span>
+            <span class="px-3 py-2 bg-green-100 text-green-800 rounded-lg font-medium">Embed (ada-002)</span>
+            <span class="text-gray-400">→</span>
+            <span class="px-3 py-2 bg-orange-100 text-orange-800 rounded-lg font-medium">pgvector (1536 dim)</span>
+            <span class="text-gray-400">→</span>
+            <span class="px-3 py-2 bg-red-100 text-red-800 rounded-lg font-medium">Hybrid Search</span>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="font-semibold mb-3">Document Processing Libraries</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-4">pdf2json</td><td>^3.2.2</td><td class="text-gray-500">PDF text extraction</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">mammoth</td><td>^1.11.0</td><td class="text-gray-500">DOCX to HTML conversion</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">xlsx</td><td>^0.18.5</td><td class="text-gray-500">Excel spreadsheet parsing</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">textract</td><td>^0.20.0</td><td class="text-gray-500">Multi-format extraction</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">cheerio</td><td>^1.1.2</td><td class="text-gray-500">HTML scraping & parsing</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">youtube-transcript</td><td>^1.2.1</td><td class="text-gray-500">YouTube transcript fetch</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">youtubei.js</td><td>^15.1.1</td><td class="text-gray-500">YouTube metadata API</td></tr>
+                </table>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-3">RAG Service Files</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 text-xs">/lib/services/rag-service.ts</td><td class="text-gray-500">Main RAG orchestration</td></tr>
+                    <tr><td class="font-mono py-1 text-xs">/lib/services/embedding-service.ts</td><td class="text-gray-500">OpenAI embedding calls</td></tr>
+                    <tr><td class="font-mono py-1 text-xs">/lib/services/knowledge-rag-service.ts</td><td class="text-gray-500">Knowledge base RAG</td></tr>
+                    <tr><td class="font-mono py-1 text-xs">/lib/rag/retriever.ts</td><td class="text-gray-500">Vector retrieval logic</td></tr>
+                    <tr><td class="font-mono py-1 text-xs">/lib/knowledge/batch-processor.ts</td><td class="text-gray-500">Batch embedding jobs</td></tr>
+                    <tr><td class="font-mono py-1 text-xs">/lib/embeddings/generator.ts</td><td class="text-gray-500">Embedding generation</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Third-Party Integrations -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-emerald-50 to-white">
+        <h3 class="text-lg font-bold text-emerald-800">Third-Party Integrations (7 Services)</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="p-4 border border-emerald-200 rounded-lg">
+                <h4 class="font-semibold mb-2 text-emerald-800">Supabase (Database & Auth)</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-3">@supabase/supabase-js</td><td>^2.50.2</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">@supabase/ssr</td><td>^0.6.1</td></tr>
+                </table>
+                <div class="text-xs text-gray-500 mt-2">PostgreSQL 17.6 + pgvector + RLS + Auth</div>
+                <div class="text-xs text-gray-400 mt-1">Files: /lib/supabase/server.ts, client.ts</div>
+            </div>
+            <div class="p-4 border border-green-200 rounded-lg">
+                <h4 class="font-semibold mb-2 text-green-800">Stripe Billing</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-3">stripe</td><td>^18.5.0</td></tr>
+                </table>
+                <div class="text-xs text-gray-500 mt-2">Checkout, Subscriptions, Webhooks, Credits</div>
+                <div class="text-xs text-gray-400 mt-1">Routes: /api/subscriptions/*, /api/webhooks/stripe</div>
+            </div>
+            <div class="p-4 border border-blue-200 rounded-lg">
+                <h4 class="font-semibold mb-2 text-blue-800">Meta Ads API</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-3">facebook-nodejs-business-sdk</td><td>^23.0.1</td></tr>
+                </table>
+                <div class="text-xs text-gray-500 mt-2">OAuth, Ad Accounts, Campaigns, Insights</div>
+                <div class="text-xs text-gray-400 mt-1">Files: /lib/meta/client.ts, /api/meta/*</div>
+            </div>
+            <div class="p-4 border border-yellow-200 rounded-lg">
+                <h4 class="font-semibold mb-2 text-yellow-800">Google Ads API</h4>
+                <div class="text-xs text-gray-500 mt-2">OAuth, Campaigns, Keywords, Reports</div>
+                <div class="text-xs text-gray-400 mt-1">Files: /lib/google-ads/client.ts, /api/google-ads/*</div>
+            </div>
+            <div class="p-4 border border-pink-200 rounded-lg">
+                <h4 class="font-semibold mb-2 text-pink-800">AssemblyAI Voice</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-3">recordrtc</td><td>^5.6.2</td></tr>
+                </table>
+                <div class="text-xs text-gray-500 mt-2">Real-time STT via WebSocket (~300ms latency)</div>
+                <div class="text-xs text-gray-400 mt-1">Hook: useVoiceInput.ts, Token: /api/assemblyai-token</div>
+            </div>
+            <div class="p-4 border border-gray-200 rounded-lg">
+                <h4 class="font-semibold mb-2 text-gray-800">Web Scraping</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-3">apify-client</td><td>^2.17.0</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">cheerio</td><td>^1.1.2</td></tr>
+                </table>
+                <div class="text-xs text-gray-500 mt-2">URL crawling for knowledge base ingestion</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- UI Component Libraries -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-purple-50 to-white">
+        <h3 class="text-lg font-bold text-purple-800">UI Components (39 shadcn/ui + 17 Radix)</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h4 class="font-semibold mb-3 text-purple-700">Radix UI Primitives (17 packages)</h4>
+                <div class="grid grid-cols-2 gap-1 text-xs font-mono">
+                    <div>@radix-ui/react-accordion</div>
+                    <div>@radix-ui/react-alert-dialog</div>
+                    <div>@radix-ui/react-avatar</div>
+                    <div>@radix-ui/react-checkbox</div>
+                    <div>@radix-ui/react-dialog</div>
+                    <div>@radix-ui/react-dropdown-menu</div>
+                    <div>@radix-ui/react-label</div>
+                    <div>@radix-ui/react-navigation-menu</div>
+                    <div>@radix-ui/react-popover</div>
+                    <div>@radix-ui/react-progress</div>
+                    <div>@radix-ui/react-radio-group</div>
+                    <div>@radix-ui/react-scroll-area</div>
+                    <div>@radix-ui/react-select</div>
+                    <div>@radix-ui/react-separator</div>
+                    <div>@radix-ui/react-slot</div>
+                    <div>@radix-ui/react-switch</div>
+                    <div>@radix-ui/react-tabs</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-3 text-cyan-700">Styling & Animation</h4>
+                <table class="text-sm">
+                    <tr><td class="font-mono py-1 pr-4">tailwindcss</td><td>^4</td><td class="text-gray-500">Utility-first CSS framework</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">tailwindcss-animate</td><td>^1.0.7</td><td class="text-gray-500">Animation utilities</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">class-variance-authority</td><td>^0.7.1</td><td class="text-gray-500">Component variant management</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">clsx + tailwind-merge</td><td>^2.1.1</td><td class="text-gray-500">Conditional class utilities</td></tr>
+                    <tr><td class="font-mono py-1 pr-4">lucide-react</td><td>^0.523.0</td><td class="text-gray-500">500+ SVG icons</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- State & Forms -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-green-50 to-white">
+        <h3 class="text-lg font-bold text-green-800">State Management & Forms</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div>
+                <h4 class="font-semibold mb-2">Zustand ^5.0.8</h4>
+                <p class="text-xs text-gray-500 mb-2">Lightweight global state</p>
+                <div class="text-xs bg-gray-100 p-2 rounded">
+                    <div class="font-mono">chat-store.ts:</div>
+                    <ul class="mt-1 space-y-1">
+                        <li>• defaultModel</li>
+                        <li>• conversations[]</li>
+                        <li>• activeConversationId</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2">React Hook Form ^7.58.1</h4>
+                <p class="text-xs text-gray-500 mb-2">Performant form handling</p>
+                <div class="text-xs bg-gray-100 p-2 rounded">
+                    <div class="font-mono">With validators:</div>
+                    <ul class="mt-1 space-y-1">
+                        <li>• @hookform/resolvers</li>
+                        <li>• zod ^3.25.67</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2">React Contexts (4)</h4>
+                <ul class="text-xs space-y-1">
+                    <li><strong>AuthContext</strong> - User session, auth state</li>
+                    <li><strong>BusinessContext</strong> - Company profile data</li>
+                    <li><strong>NavigationContext</strong> - Sidebar state</li>
+                    <li><strong>CopywriterContext</strong> - AI agent selection</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Markdown & Rich Text -->
+<div class="card mb-8">
+    <div class="section-header">
+        <h3 class="text-lg font-bold">Markdown & Rich Text Rendering</h3>
+    </div>
+    <div class="p-6">
+        <table class="text-sm">
+            <thead><tr><th>Package</th><th>Version</th><th>Purpose</th><th>Used In</th></tr></thead>
+            <tbody>
+                <tr><td class="font-mono">react-markdown</td><td>^10.1.0</td><td>Markdown renderer component</td><td class="text-xs text-gray-500">Chat messages, offer content</td></tr>
+                <tr><td class="font-mono">marked</td><td>^16.3.0</td><td>Markdown parser to HTML</td><td class="text-xs text-gray-500">Server-side rendering</td></tr>
+                <tr><td class="font-mono">remark-gfm</td><td>^4.0.1</td><td>GitHub Flavored Markdown</td><td class="text-xs text-gray-500">Tables, task lists, strikethrough</td></tr>
+                <tr><td class="font-mono">rehype-raw</td><td>-</td><td>Raw HTML in markdown</td><td class="text-xs text-gray-500">Embedded HTML support</td></tr>
+                <tr><td class="font-mono">react-syntax-highlighter</td><td>^16.1.0</td><td>Code block syntax coloring</td><td class="text-xs text-gray-500">Code snippets in chat</td></tr>
+                <tr><td class="font-mono">isomorphic-dompurify</td><td>^2.28.0</td><td>XSS sanitization</td><td class="text-xs text-gray-500">User-generated content</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Utilities & Extras -->
+<div class="card mb-8">
+    <div class="section-header">
+        <h3 class="text-lg font-bold">Utilities & UI Extras</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-4 gap-4">
+            <div>
+                <h4 class="font-semibold mb-2 text-sm">Core Utils</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>lodash ^4.17.21</div>
+                    <div>date-fns ^4.1.0</div>
+                    <div>uuid ^11.1.0</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-sm">UI Components</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>sonner ^2.0.7 (toasts)</div>
+                    <div>recharts ^3.2.1 (charts)</div>
+                    <div>react-day-picker ^9.10.0</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-sm">Drag & Drop</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>@dnd-kit/core ^6.3.1</div>
+                    <div>@dnd-kit/sortable ^10.0.0</div>
+                    <div>@dnd-kit/utilities ^3.2.2</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-sm">Other</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>next-themes ^0.4.6</div>
+                    <div>@hookform/resolvers</div>
+                    <div>input-otp ^1.4.2</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Deployment & DevOps -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-emerald-50 to-white">
+        <h3 class="text-lg font-bold text-emerald-800">Deployment & Infrastructure</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+                <h4 class="font-semibold mb-3">Vercel Deployment</h4>
+                <table class="text-sm">
+                    <tr><td class="py-1 text-gray-500 w-32">Primary URL</td><td class="font-medium">ai.adspend.com</td></tr>
+                    <tr><td class="py-1 text-gray-500">Vercel URL</td><td class="font-mono text-xs">adspend-ai.vercel.app</td></tr>
+                    <tr><td class="py-1 text-gray-500">Team</td><td>Adspend</td></tr>
+                    <tr><td class="py-1 text-gray-500">Region</td><td>iad1 (Washington D.C.)</td></tr>
+                    <tr><td class="py-1 text-gray-500">Node.js</td><td>22.x</td></tr>
+                    <tr><td class="py-1 text-gray-500">Framework</td><td>Next.js (auto-detected)</td></tr>
+                </table>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-3">Environment Variables (31)</h4>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-blue-500 rounded-full"></span>SUPABASE_* (3)</div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-full"></span>OPENAI_API_KEY</div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-full"></span>ANTHROPIC_API_KEY</div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-full"></span>GOOGLE_AI_KEY</div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full"></span>STRIPE_* (4)</div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-cyan-500 rounded-full"></span>META_* (3)</div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-yellow-500 rounded-full"></span>GOOGLE_ADS_* (3)</div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-orange-500 rounded-full"></span>ASSEMBLYAI_KEY</div>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 bg-gray-50 rounded-lg">
+            <h4 class="font-semibold mb-2 text-sm">Security Headers (vercel.json)</h4>
+            <div class="text-xs font-mono space-y-1">
+                <div>X-Content-Type-Options: nosniff</div>
+                <div>X-Frame-Options: DENY</div>
+                <div>X-XSS-Protection: 1; mode=block</div>
+                <div>Referrer-Policy: strict-origin-when-cross-origin</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Database Schema (Supabase PostgreSQL) -->
+<div class="card mb-8">
+    <div class="section-header bg-gradient-to-r from-cyan-50 to-white">
+        <h3 class="text-lg font-bold text-cyan-800">Database Schema (PostgreSQL 17.6 + pgvector)</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                <div class="text-2xl font-bold text-cyan-800">63</div>
+                <div class="text-xs text-cyan-700">Public Tables</div>
+            </div>
+            <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                <div class="text-2xl font-bold text-cyan-800">8</div>
+                <div class="text-xs text-cyan-700">Schemas</div>
+            </div>
+            <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                <div class="text-2xl font-bold text-cyan-800">1536</div>
+                <div class="text-xs text-cyan-700">Vector Dims</div>
+            </div>
+            <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                <div class="text-2xl font-bold text-cyan-800">7</div>
+                <div class="text-xs text-cyan-700">Extensions</div>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4 mb-6">
+            <div>
+                <h4 class="font-semibold mb-2 text-blue-600 text-sm">User & Auth (8)</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>auth.users, user_roles</div>
+                    <div>user_preferences, user_patterns</div>
+                    <div>user_meta_tokens, user_google_ads_tokens</div>
+                    <div>admin_impersonation_sessions</div>
+                    <div>onboarding_progress</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-purple-600 text-sm">Offers & Business (8)</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>business_offers (8P Framework)</div>
+                    <div>offer_versions, offer_files</div>
+                    <div>offer_file_embeddings</div>
+                    <div>offer_step_prompts</div>
+                    <div>subscriptions, subscription_plans</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-green-600 text-sm">AI Agents & Conversations (12)</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>ai_agents, agent_versions</div>
+                    <div>agent_performance, agent_training_documents</div>
+                    <div>conversations, messages</div>
+                    <div>conversation_summaries</div>
+                    <div>ai_models, ai_response_cache</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-orange-600 text-sm">Knowledge & RAG (15)</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>knowledge_base, knowledge_embeddings</div>
+                    <div>knowledge_collections, knowledge_collection_items</div>
+                    <div>knowledge_agent_assignments</div>
+                    <div>rag_query_cache, rag_response_cache</div>
+                    <div>scraping_jobs, embedding_events</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-red-600 text-sm">Usage & Analytics (10)</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>ai_usage_logs, ai_usage_quotas</div>
+                    <div>usage_analytics, historical_insights</div>
+                    <div>performance_metrics, embedding_metrics</div>
+                    <div>memory_compression_events</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-gray-600 text-sm">System & Admin (10)</h4>
+                <div class="text-xs space-y-1 font-mono">
+                    <div>system_settings, system_alerts</div>
+                    <div>admin_notifications, error_reports</div>
+                    <div>meta_tokens, meta_sync_logs</div>
+                    <div>knowledge_upload_rate_limits</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+            <div class="p-3 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold mb-2 text-sm">Extensions Enabled</h4>
+                <div class="flex flex-wrap gap-1">
+                    <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs">vector (pgvector)</span>
+                    <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">pg_graphql</span>
+                    <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs">pg_trgm</span>
+                    <span class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded text-xs">pgcrypto</span>
+                    <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs">supabase_vault</span>
+                    <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">uuid-ossp</span>
+                    <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">pg_stat_statements</span>
+                </div>
+            </div>
+            <div class="p-3 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold mb-2 text-sm">Database Schemas</h4>
+                <div class="flex flex-wrap gap-1">
+                    <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">public (63)</span>
+                    <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs">auth</span>
+                    <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs">storage</span>
+                    <span class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded text-xs">realtime</span>
+                    <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs">vault</span>
+                    <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">graphql</span>
+                    <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">extensions</span>
+                    <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">supabase_migrations</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4 p-3 bg-cyan-50 rounded-lg border border-cyan-200">
+            <h4 class="font-semibold mb-2 text-cyan-800 text-sm">Vector Search (Hybrid RAG)</h4>
+            <div class="code-block text-xs">
+<span class="text-green-400">-- knowledge_embeddings uses both vector + tsvector for hybrid search</span>
+embedding vector(1536)  <span class="text-cyan-400">-- OpenAI text-embedding-ada-002</span>
+chunk_tsv tsvector      <span class="text-cyan-400">-- Full-text search</span>
+
+<span class="text-green-400">-- Cosine similarity search with threshold</span>
+WHERE 1 - (embedding &lt;=&gt; query_embedding) > 0.7
+ORDER BY embedding &lt;=&gt; query_embedding LIMIT 10;
+            </div>
+        </div>
+
+        <!-- Table-to-Code Mapping -->
+        <div class="mt-4 pt-4 border-t border-gray-200">
+            <h4 class="font-semibold mb-3 text-gray-800 text-sm">Table-to-Code Mapping</h4>
+            <div class="overflow-x-auto">
+                <table class="text-xs w-full">
+                    <thead>
+                        <tr class="bg-gray-100"><th class="text-left p-2">Table</th><th class="text-left p-2">API Routes</th><th class="text-left p-2">Services/Hooks</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-100">
+                            <td class="p-2"><code class="bg-purple-100 px-1 rounded">business_offers</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/offers/*, /api/business/offers/*</td>
+                            <td class="p-2 text-gray-500">useOffers, offer-version.ts</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <td class="p-2"><code class="bg-green-100 px-1 rounded">ai_agents</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/ai-agents/*</td>
+                            <td class="p-2 text-gray-500">useAgents, agent-sync</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <td class="p-2"><code class="bg-green-100 px-1 rounded">conversations</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/conversations/*, /api/chat/*</td>
+                            <td class="p-2 text-gray-500">useConversations, conversations.service.ts</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <td class="p-2"><code class="bg-orange-100 px-1 rounded">knowledge_base</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/knowledge/*</td>
+                            <td class="p-2 text-gray-500">knowledge-rag-service.ts, batch-processor.ts</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <td class="p-2"><code class="bg-orange-100 px-1 rounded">knowledge_embeddings</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/rag/search</td>
+                            <td class="p-2 text-gray-500">rag-service.ts, embedding-service.ts, retriever.ts</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <td class="p-2"><code class="bg-green-100 px-1 rounded">messages</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/conversations/[id]/messages</td>
+                            <td class="p-2 text-gray-500">conversationContext.ts, chat-store.ts</td>
+                        </tr>
+                        <tr class="border-b border-gray-100">
+                            <td class="p-2"><code class="bg-blue-100 px-1 rounded">subscriptions</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/billing/*, /api/webhooks/stripe</td>
+                            <td class="p-2 text-gray-500">Stripe webhook handlers</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2"><code class="bg-orange-100 px-1 rounded">scraping_jobs</code></td>
+                            <td class="p-2 font-mono text-gray-600">/api/content/scrape, /api/knowledge/crawl</td>
+                            <td class="p-2 text-gray-500">Apify integration</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Development & Testing -->
+<div class="card">
+    <div class="section-header bg-gradient-to-r from-slate-50 to-white">
+        <h3 class="text-lg font-bold text-slate-800">Development & Testing (24 packages)</h3>
+    </div>
+    <div class="p-6">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div>
+                <h4 class="font-semibold mb-2 text-sm">Testing</h4>
+                <table class="text-xs">
+                    <tr><td class="font-mono py-1 pr-3">vitest</td><td>^3.2.4</td><td class="text-gray-400">Unit tests</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">@playwright/test</td><td>^1.55.1</td><td class="text-gray-400">E2E tests</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">@testing-library/react</td><td>^16.3.0</td><td class="text-gray-400">Component tests</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">jest + jsdom</td><td>^30.2.0</td><td class="text-gray-400">DOM testing</td></tr>
+                </table>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-sm">Linting & Formatting</h4>
+                <table class="text-xs">
+                    <tr><td class="font-mono py-1 pr-3">eslint</td><td>^9</td><td class="text-gray-400">Code linting</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">eslint-config-next</td><td>15.3.4</td><td class="text-gray-400">Next.js rules</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">prettier-plugin-tailwindcss</td><td>-</td><td class="text-gray-400">Class sorting</td></tr>
+                </table>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2 text-sm">Type Definitions</h4>
+                <table class="text-xs">
+                    <tr><td class="font-mono py-1 pr-3">@types/node</td><td>^20</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">@types/react</td><td>^19</td></tr>
+                    <tr><td class="font-mono py-1 pr-3">@types/lodash</td><td>^4.17.20</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

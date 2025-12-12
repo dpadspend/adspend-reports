@@ -1,0 +1,2911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AdSpend AI - Platform Reports</title>
+    <link rel="icon" type="image/png" href="https://www.adspend.com/hosted/images/96/356079cdde47be9cea3d6bc7d91ce1/Adspend-logo-transparent-black-background_1.png">
+    <!-- Open Graph / iMessage Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AdSpend AI - Platform Reports">
+    <meta property="og:description" content="Comprehensive Security & Architecture Review">
+    <meta property="og:image" content="https://www.adspend.com/hosted/images/96/356079cdde47be9cea3d6bc7d91ce1/Adspend-logo-transparent-black-background_1.png">
+    <meta property="og:url" content="https://adspendai.onrender.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AdSpend AI - Platform Reports">
+    <meta name="twitter:description" content="Comprehensive Security & Architecture Review">
+    <meta name="twitter:image" content="https://www.adspend.com/hosted/images/96/356079cdde47be9cea3d6bc7d91ce1/Adspend-logo-transparent-black-background_1.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --adspend-red: #dc0f0f;
+            --adspend-red-dark: #cd291a;
+            --adspend-green: #08a911;
+            --adspend-blue: #0769f5;
+            --adspend-cyan: rgb(50, 197, 255);
+            --adspend-dark: #111111;
+            --adspend-gray: #2d2d2d;
+        }
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        .code-block {
+            background: var(--adspend-dark);
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-width: 100%;
+        }
+        .nav-bar {
+            background: #2d2d2d;
+            border-bottom: 1px solid rgba(220, 15, 15, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            padding: 0 24px;
+            height: 52px;
+        }
+        .nav-group {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+        .nav-divider {
+            width: 1px;
+            height: 24px;
+            background: linear-gradient(180deg, transparent 0%, rgba(220, 15, 15, 0.3) 50%, transparent 100%);
+            margin: 0 12px;
+        }
+        .nav-item {
+            position: relative;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #9ca3af;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .nav-item:hover {
+            color: #ffffff;
+            background: rgba(220, 15, 15, 0.15);
+        }
+        .nav-item-active {
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(220, 15, 15, 0.25) 0%, rgba(205, 41, 26, 0.2) 100%);
+        }
+        /* Mobile hamburger menu - show on mobile only */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(220, 15, 15, 0.2);
+            border: 1px solid rgba(220, 15, 15, 0.4);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 14px;
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 100;
+        }
+        .mobile-menu-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            * {
+                max-width: 100vw;
+                box-sizing: border-box;
+            }
+            .header-content {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                padding: 8px 16px;
+            }
+            .header-content > div:first-child {
+                display: none; /* Hide logo on mobile */
+            }
+            .header-content h1 {
+                font-size: 1.1rem;
+            }
+            .header-content p {
+                font-size: 0.7rem;
+            }
+            .header-logo {
+                height: 40px;
+            }
+            .header-badges {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .nav-bar {
+                position: sticky;
+                top: 48px;
+                z-index: 40;
+            }
+            .nav-container {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 70px;
+                left: 12px;
+                right: 12px;
+                background: #2d2d2d;
+                border: 1px solid rgba(220, 15, 15, 0.3);
+                border-radius: 12px;
+                padding: 12px 0;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+                z-index: 99;
+            }
+            .nav-container.mobile-open {
+                display: flex;
+            }
+            .nav-group {
+                width: 100%;
+            }
+            .nav-divider {
+                display: none;
+            }
+            .nav-item {
+                display: block;
+                padding: 12px 20px;
+                font-size: 14px;
+                text-align: left;
+                width: 100%;
+            }
+            .nav-badge {
+                font-size: 10px;
+                padding: 2px 6px;
+                margin-left: 8px;
+            }
+            .stat-card {
+                padding: 12px;
+            }
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            .code-block {
+                font-size: 9px;
+                padding: 8px;
+                line-height: 1.3;
+                white-space: pre-wrap;
+                word-break: break-all;
+                overflow-x: hidden;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                max-width: 100%;
+            }
+            th, td {
+                padding: 6px 8px;
+                font-size: 10px;
+                word-break: break-word;
+            }
+            .card {
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .card > div {
+                overflow-x: hidden;
+            }
+            .section-header {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+            .section-header h3 {
+                font-size: 14px;
+            }
+            .vulnerability-card {
+                padding: 10px;
+            }
+            .checklist-item {
+                padding: 8px;
+                gap: 8px;
+            }
+            h2 {
+                font-size: 1.5rem !important;
+            }
+            h3 {
+                font-size: 1.1rem;
+            }
+            .tree-item {
+                font-size: 9px;
+                line-height: 1.4;
+                word-break: break-all;
+            }
+            main {
+                overflow-x: hidden;
+            }
+            .grid {
+                gap: 8px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .header-content h1 {
+                font-size: 0.95rem;
+            }
+            .nav-bar {
+                top: 44px;
+            }
+            .nav-item {
+                padding: 6px 8px;
+                font-size: 11px;
+            }
+            .nav-badge {
+                font-size: 8px;
+                padding: 1px 3px;
+            }
+            .stat-value {
+                font-size: 1.25rem;
+            }
+            .stat-card .text-sm {
+                font-size: 10px;
+            }
+            .code-block {
+                font-size: 8px;
+                padding: 6px;
+            }
+        }
+        .nav-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 6px;
+            margin-left: 6px;
+            font-size: 10px;
+            font-weight: 600;
+            border-radius: 4px;
+            letter-spacing: 0.02em;
+        }
+        .severity-critical {
+            background: linear-gradient(135deg, #dc0f0f 0%, #991b1b 100%);
+            color: white;
+        }
+        .severity-high {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+            color: white;
+        }
+        .severity-medium {
+            background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);
+            color: white;
+        }
+        .severity-low {
+            background: linear-gradient(135deg, #0769f5 0%, #1d4ed8 100%);
+            color: white;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #dc0f0f 0%, #cd291a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-header {
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px 12px 0 0;
+            margin: -1px -1px 0 -1px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .vulnerability-card {
+            border-left: 4px solid;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: white;
+            border-radius: 0 8px 8px 0;
+        }
+        .vulnerability-card.critical { border-color: #dc2626; background: #fef2f2; }
+        .vulnerability-card.high { border-color: #ea580c; background: #fff7ed; }
+        .vulnerability-card.medium { border-color: #ca8a04; background: #fefce8; }
+        .vulnerability-card.low { border-color: #2563eb; background: #eff6ff; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: #f8fafc;
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #475569;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+        tr:hover td {
+            background: #f8fafc;
+        }
+        .tree-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        .file-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .checklist-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .priority-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .priority-1 { background: #fee2e2; color: #991b1b; }
+        .priority-2 { background: #ffedd5; color: #c2410c; }
+        .priority-3 { background: #fef3c7; color: #a16207; }
+        .priority-4 { background: #dbeafe; color: #1d4ed8; }
+        .priority-5 { background: #f3e8ff; color: #7c3aed; }
+        /* Hide mobile logout on desktop */
+        .mobile-logout { display: none; }
+        @media (max-width: 768px) {
+            .mobile-logout { display: block; border-top: 1px solid rgba(220, 15, 15, 0.2); margin-top: 8px; padding-top: 8px; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <!-- Header -->
+    <header class="bg-[#111111] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 relative">
+            <div class="header-content flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <img src="https://www.adspend.com/hosted/images/96/356079cdde47be9cea3d6bc7d91ce1/Adspend-logo-transparent-black-background_1.png" alt="AdSpend" class="header-logo h-16 md:h-20 w-auto">
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <h1 class="text-xl md:text-3xl font-bold text-white text-center">AdSpend AI <span class="text-white">Codebase Analysis</span></h1>
+                    <p class="text-xs md:text-base text-gray-400 text-center">Comprehensive Security & Architecture Review</p>
+                </div>
+                <div class="header-badges flex items-center gap-3">
+                    <span class="px-2.5 py-1 bg-[#0769f5]/20 text-blue-300 rounded text-xs font-medium border border-[#0769f5]/40">v1.1</span>
+                    <span class="px-2.5 py-1 bg-gray-500/20 text-gray-300 rounded text-xs font-medium border border-gray-500/30">Dec 11, 2025</span>
+                    <a href="/api/logout" class="px-2.5 py-1 bg-red-600/20 text-red-300 rounded text-xs font-medium border border-red-500/40 hover:bg-red-600/40 transition-colors cursor-pointer flex items-center gap-1">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-bar sticky top-[56px] md:top-[104px] z-40">
+        <div class="nav-container">
+            <div class="nav-group">
+                <a href="#recommendations" class="nav-item nav-item-active" onclick="showTab('recommendations', event)">
+                    Recommendations<span class="nav-badge" style="background: rgba(220,15,15,0.2); color: #ff6b6b;">9</span>
+                </a>
+            </div>
+            <div class="nav-divider"></div>
+            <div class="nav-group">
+                <a href="#techstack" class="nav-item" onclick="showTab('techstack', event)">
+                    Tech Stack
+                </a>
+            </div>
+            <div class="nav-divider"></div>
+            <div class="nav-group">
+                <a href="#database" class="nav-item" onclick="showTab('database', event)">
+                    Database<span class="nav-badge" style="background: rgba(7,105,245,0.2); color: #60a5fa;">2</span>
+                </a>
+            </div>
+            <div class="nav-divider"></div>
+            <div class="nav-group">
+                <a href="#changelog" class="nav-item" onclick="showTab('changelog', event)">
+                    Changelog<span class="nav-badge" style="background: rgba(8,169,17,0.2); color: #4ade80;">150+</span>
+                </a>
+            </div>
+            <div class="nav-group mobile-logout">
+                <a href="/api/logout" class="nav-item" style="color: #ff6b6b;">
+                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    Logout
+                </a>
+            </div>
+        </div>
+        <!-- Mobile hamburger button -->
+        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-container').classList.toggle('mobile-open')">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-8">
+        <!-- Tech Stack Tab (Comprehensive) -->
+        <div id="techstack" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Complete Tech Stack</h2>
+                <p class="text-gray-600">90+ packages, 194 components, 158 API routes, 7 integrations - Full system architecture</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+                <div class="stat-card">
+                    <div class="stat-value">158</div>
+                    <div class="text-sm text-gray-600 font-medium">API Routes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">194</div>
+                    <div class="text-sm text-gray-600 font-medium">Components</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">99</div>
+                    <div class="text-sm text-gray-600 font-medium">Migrations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">500+</div>
+                    <div class="text-sm text-gray-600 font-medium">TS Files</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">70</div>
+                    <div class="text-sm text-gray-600 font-medium">Dependencies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">15</div>
+                    <div class="text-sm text-gray-600 font-medium">Test Suites</div>
+                </div>
+            </div>
+
+            <!-- Core Framework -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-blue-50 to-white">
+                    <h3 class="text-lg font-bold text-blue-800">Core Framework & Runtime</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-4 gap-4 mb-6">
+                        <div class="p-4 bg-gray-900 rounded-lg text-white">
+                            <div class="text-xs text-gray-400 uppercase mb-1">Runtime</div>
+                            <div class="font-bold text-lg">Next.js 15.5.4</div>
+                            <div class="text-sm text-gray-400">App Router + Turbopack</div>
+                        </div>
+                        <div class="p-4 bg-blue-600 rounded-lg text-white">
+                            <div class="text-xs text-blue-200 uppercase mb-1">UI Library</div>
+                            <div class="font-bold text-lg">React 19.0.0</div>
+                            <div class="text-sm text-blue-200">Concurrent features</div>
+                        </div>
+                        <div class="p-4 bg-blue-800 rounded-lg text-white">
+                            <div class="text-xs text-blue-300 uppercase mb-1">Language</div>
+                            <div class="font-bold text-lg">TypeScript 5</div>
+                            <div class="text-sm text-blue-300">Strict mode</div>
+                        </div>
+                        <div class="p-4 bg-emerald-600 rounded-lg text-white">
+                            <div class="text-xs text-emerald-200 uppercase mb-1">Node</div>
+                            <div class="font-bold text-lg">22.x (LTS)</div>
+                            <div class="text-sm text-emerald-200">Vercel runtime</div>
+                        </div>
+                    </div>
+                    <table class="text-sm">
+                        <thead><tr><th>Package</th><th>Version</th><th>Purpose</th><th>Key Files</th></tr></thead>
+                        <tbody>
+                            <tr><td class="font-mono">next</td><td>^15.5.4</td><td>Full-stack React framework with App Router, RSC, streaming</td><td class="text-xs text-gray-500">next.config.ts, middleware.ts</td></tr>
+                            <tr><td class="font-mono">react / react-dom</td><td>^19.0.0</td><td>UI library with concurrent rendering, Suspense</td><td class="text-xs text-gray-500">All components</td></tr>
+                            <tr><td class="font-mono">typescript</td><td>^5</td><td>Type-safe JavaScript with strict mode enabled</td><td class="text-xs text-gray-500">tsconfig.json, /types/</td></tr>
+                            <tr><td class="font-mono">next-themes</td><td>^0.4.6</td><td>Dark/light mode theming with system preference</td><td class="text-xs text-gray-500">ThemeProvider</td></tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Project Structure -->
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <h4 class="font-semibold mb-3 text-gray-800">Project Structure (Detailed)</h4>
+                        <div class="code-block text-xs">
+src/
+├── app/                          <span class="text-blue-400"># Next.js App Router (42 route dirs)</span>
+│   ├── api/                      <span class="text-green-400"># 158 API routes</span>
+│   │   ├── admin/                <span class="text-gray-500"># User mgmt, settings, impersonation (15+)</span>
+│   │   ├── ai-agents/            <span class="text-gray-500"># CRUD, versions, context, search (12)</span>
+│   │   ├── chat/                 <span class="text-gray-500"># Streaming completion routes (4)</span>
+│   │   ├── conversations/        <span class="text-gray-500"># CRUD, messages, titles (8)</span>
+│   │   ├── knowledge/            <span class="text-gray-500"># Upload, process, search, crawl (16)</span>
+│   │   ├── meta/                 <span class="text-gray-500"># OAuth, accounts, campaigns (9)</span>
+│   │   ├── google-ads/           <span class="text-gray-500"># OAuth, campaigns, keywords (8)</span>
+│   │   ├── offers/               <span class="text-gray-500"># CRUD, generate, enhance (14)</span>
+│   │   ├── subscriptions/        <span class="text-gray-500"># Checkout, portal, credits (7)</span>
+│   │   ├── webhooks/             <span class="text-gray-500"># Stripe webhooks</span>
+│   │   └── rag/                  <span class="text-gray-500"># RAG search endpoint</span>
+│   ├── (auth)/                   <span class="text-gray-500"># login, signup, reset-password</span>
+│   ├── admin/                    <span class="text-gray-500"># Admin dashboard pages</span>
+│   ├── copywriter/               <span class="text-gray-500"># AI copywriting interface</span>
+│   ├── offers/                   <span class="text-gray-500"># 8P offer wizard</span>
+│   └── settings/                 <span class="text-gray-500"># User settings</span>
+├── components/                   <span class="text-green-400"># 194 React components</span>
+│   ├── ui/                       <span class="text-gray-500"># 39 shadcn/ui base components</span>
+│   ├── offers/                   <span class="text-gray-500"># 49 offer wizard components</span>
+│   ├── chat/                     <span class="text-gray-500"># 15 chat UI (messages, sidebar, input)</span>
+│   ├── auth/                     <span class="text-gray-500"># 12 auth forms and guards</span>
+│   ├── admin/                    <span class="text-gray-500"># Admin panel components</span>
+│   ├── knowledge/                <span class="text-gray-500"># Knowledge base UI</span>
+│   └── layout/                   <span class="text-gray-500"># Header, sidebar, navigation</span>
+├── contexts/                     <span class="text-purple-400"># React Context providers (4)</span>
+│   ├── AuthContext.tsx           <span class="text-gray-500"># User session, auth state</span>
+│   ├── BusinessContext.tsx       <span class="text-gray-500"># Company profile</span>
+│   ├── NavigationContext.tsx     <span class="text-gray-500"># Sidebar state</span>
+│   └── CopywriterContext.tsx     <span class="text-gray-500"># AI agent selection</span>
+├── hooks/                        <span class="text-cyan-400"># Custom React hooks (20+)</span>
+│   ├── useVoiceInput.ts          <span class="text-gray-500"># AssemblyAI voice recording</span>
+│   ├── useConversations.ts       <span class="text-gray-500"># Conversation management</span>
+│   ├── useAgents.ts              <span class="text-gray-500"># AI agent selection</span>
+│   ├── useCopywriterAI.ts        <span class="text-gray-500"># Copywriter chat hook</span>
+│   └── useConversationMemory.ts  <span class="text-gray-500"># Context window management</span>
+├── lib/                          <span class="text-blue-400"># Core libraries & services</span>
+│   ├── ai/                       <span class="text-gray-500"># router.ts, providers.ts, models.ts</span>
+│   ├── services/                 <span class="text-gray-500"># rag-service, credits-service, etc.</span>
+│   ├── stores/                   <span class="text-gray-500"># chat-store.ts (Zustand)</span>
+│   ├── supabase/                 <span class="text-gray-500"># server.ts, client.ts, middleware.ts</span>
+│   ├── meta/                     <span class="text-gray-500"># Meta Ads API client</span>
+│   ├── google-ads/               <span class="text-gray-500"># Google Ads API client</span>
+│   ├── rag/                      <span class="text-gray-500"># retriever.ts, chunker.ts</span>
+│   ├── knowledge/                <span class="text-gray-500"># batch-processor.ts</span>
+│   ├── embeddings/               <span class="text-gray-500"># generator.ts</span>
+│   ├── memory/                   <span class="text-gray-500"># conversationSummarizer.ts</span>
+│   └── utils/                    <span class="text-gray-500"># db-helpers, offer-version, etc.</span>
+├── types/                        <span class="text-gray-500"># 22 TypeScript definitions</span>
+│   ├── database.types.ts         <span class="text-gray-500"># Supabase generated types</span>
+│   ├── agents.ts                 <span class="text-gray-500"># AI agent interfaces</span>
+│   ├── knowledge.ts              <span class="text-gray-500"># Knowledge base types</span>
+│   ├── offers-v2.ts              <span class="text-gray-500"># V2 offer schema</span>
+│   └── api.ts                    <span class="text-gray-500"># API response types</span>
+├── services/                     <span class="text-gray-500"># Business logic layer</span>
+│   └── conversations.service.ts  <span class="text-gray-500"># Conversation CRUD</span>
+└── middleware.ts                 <span class="text-yellow-400"># Auth protection, admin bypass</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & LLM Stack -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-purple-50 to-white">
+                    <h3 class="text-lg font-bold text-purple-800">AI & LLM Integration (3 Providers, 9 Models)</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Vercel AI SDK (Unified Interface)</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-4">ai</td><td>^5.0.59</td><td class="text-gray-500">Core SDK - streaming, tool calls</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">@ai-sdk/react</td><td>^2.0.59</td><td class="text-gray-500">useChat, useCompletion hooks</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">@ai-sdk/openai</td><td>^2.0.42</td><td class="text-gray-500">OpenAI provider adapter</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">@ai-sdk/anthropic</td><td>^2.0.18</td><td class="text-gray-500">Anthropic provider adapter</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">@ai-sdk/google</td><td>^2.0.5</td><td class="text-gray-500">Google Gemini adapter</td></tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">Direct Provider SDKs</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-4">openai</td><td>^5.19.1</td><td class="text-gray-500">Embeddings (ada-002), chat</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">@anthropic-ai/sdk</td><td>^0.61.0</td><td class="text-gray-500">Claude models direct</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">@google/generative-ai</td><td>^0.24.1</td><td class="text-gray-500">Gemini API direct</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">tiktoken</td><td>^1.0.22</td><td class="text-gray-500">Token counting</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <h4 class="font-semibold mb-3">Model Routing Matrix</h4>
+                    <table class="text-sm">
+                        <thead>
+                            <tr><th>Provider</th><th>Fast (cheap)</th><th>Balanced (default)</th><th>Powerful (expensive)</th><th>Use Case</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-medium text-green-700">OpenAI</td>
+                                <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gpt-4o-mini</code></td>
+                                <td><code class="text-xs bg-green-100 px-2 py-1 rounded text-green-800">gpt-4o</code></td>
+                                <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gpt-4o</code></td>
+                                <td class="text-xs text-gray-500">Copywriting, generation</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium text-purple-700">Anthropic</td>
+                                <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">claude-3-haiku</code></td>
+                                <td><code class="text-xs bg-purple-100 px-2 py-1 rounded text-purple-800">claude-sonnet-4.5</code></td>
+                                <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">claude-3-opus</code></td>
+                                <td class="text-xs text-gray-500">Complex reasoning</td>
+                            </tr>
+                            <tr>
+                                <td class="font-medium text-blue-700">Google</td>
+                                <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gemini-2.5-flash-lite</code></td>
+                                <td><code class="text-xs bg-blue-100 px-2 py-1 rounded text-blue-800">gemini-2.5-flash</code></td>
+                                <td><code class="text-xs bg-gray-100 px-2 py-1 rounded">gemini-2.5-pro</code></td>
+                                <td class="text-xs text-gray-500">Multimodal, speed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-4 text-xs text-gray-500">
+                        <strong>Key files:</strong> /src/lib/ai/router.ts (model selection), /src/lib/ai/providers.ts (provider config), /src/app/api/chat/route.ts (streaming)
+                    </div>
+                </div>
+            </div>
+
+            <!-- RAG & Knowledge Pipeline -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-orange-50 to-white">
+                    <h3 class="text-lg font-bold text-orange-800">RAG & Knowledge Pipeline</h3>
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-wrap items-center justify-center gap-2 text-xs mb-6">
+                        <span class="px-3 py-2 bg-blue-100 text-blue-800 rounded-lg font-medium">PDF/DOCX/YouTube/URL</span>
+                        <span class="text-gray-400">→</span>
+                        <span class="px-3 py-2 bg-purple-100 text-purple-800 rounded-lg font-medium">Extract & Clean</span>
+                        <span class="text-gray-400">→</span>
+                        <span class="px-3 py-2 bg-cyan-100 text-cyan-800 rounded-lg font-medium">Chunk (2000 chars)</span>
+                        <span class="text-gray-400">→</span>
+                        <span class="px-3 py-2 bg-green-100 text-green-800 rounded-lg font-medium">Embed (ada-002)</span>
+                        <span class="text-gray-400">→</span>
+                        <span class="px-3 py-2 bg-orange-100 text-orange-800 rounded-lg font-medium">pgvector (1536 dim)</span>
+                        <span class="text-gray-400">→</span>
+                        <span class="px-3 py-2 bg-red-100 text-red-800 rounded-lg font-medium">Hybrid Search</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Document Processing Libraries</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-4">pdf2json</td><td>^3.2.2</td><td class="text-gray-500">PDF text extraction</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">mammoth</td><td>^1.11.0</td><td class="text-gray-500">DOCX to HTML conversion</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">xlsx</td><td>^0.18.5</td><td class="text-gray-500">Excel spreadsheet parsing</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">textract</td><td>^0.20.0</td><td class="text-gray-500">Multi-format extraction</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">cheerio</td><td>^1.1.2</td><td class="text-gray-500">HTML scraping & parsing</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">youtube-transcript</td><td>^1.2.1</td><td class="text-gray-500">YouTube transcript fetch</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">youtubei.js</td><td>^15.1.1</td><td class="text-gray-500">YouTube metadata API</td></tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">RAG Service Files</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 text-xs">/lib/services/rag-service.ts</td><td class="text-gray-500">Main RAG orchestration</td></tr>
+                                <tr><td class="font-mono py-1 text-xs">/lib/services/embedding-service.ts</td><td class="text-gray-500">OpenAI embedding calls</td></tr>
+                                <tr><td class="font-mono py-1 text-xs">/lib/services/knowledge-rag-service.ts</td><td class="text-gray-500">Knowledge base RAG</td></tr>
+                                <tr><td class="font-mono py-1 text-xs">/lib/rag/retriever.ts</td><td class="text-gray-500">Vector retrieval logic</td></tr>
+                                <tr><td class="font-mono py-1 text-xs">/lib/knowledge/batch-processor.ts</td><td class="text-gray-500">Batch embedding jobs</td></tr>
+                                <tr><td class="font-mono py-1 text-xs">/lib/embeddings/generator.ts</td><td class="text-gray-500">Embedding generation</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third-Party Integrations -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-emerald-50 to-white">
+                    <h3 class="text-lg font-bold text-emerald-800">Third-Party Integrations (7 Services)</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="p-4 border border-emerald-200 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-emerald-800">Supabase (Database & Auth)</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-3">@supabase/supabase-js</td><td>^2.50.2</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">@supabase/ssr</td><td>^0.6.1</td></tr>
+                            </table>
+                            <div class="text-xs text-gray-500 mt-2">PostgreSQL 17.6 + pgvector + RLS + Auth</div>
+                            <div class="text-xs text-gray-400 mt-1">Files: /lib/supabase/server.ts, client.ts</div>
+                        </div>
+                        <div class="p-4 border border-green-200 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-green-800">Stripe Billing</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-3">stripe</td><td>^18.5.0</td></tr>
+                            </table>
+                            <div class="text-xs text-gray-500 mt-2">Checkout, Subscriptions, Webhooks, Credits</div>
+                            <div class="text-xs text-gray-400 mt-1">Routes: /api/subscriptions/*, /api/webhooks/stripe</div>
+                        </div>
+                        <div class="p-4 border border-blue-200 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-blue-800">Meta Ads API</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-3">facebook-nodejs-business-sdk</td><td>^23.0.1</td></tr>
+                            </table>
+                            <div class="text-xs text-gray-500 mt-2">OAuth, Ad Accounts, Campaigns, Insights</div>
+                            <div class="text-xs text-gray-400 mt-1">Files: /lib/meta/client.ts, /api/meta/*</div>
+                        </div>
+                        <div class="p-4 border border-yellow-200 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-yellow-800">Google Ads API</h4>
+                            <div class="text-xs text-gray-500 mt-2">OAuth, Campaigns, Keywords, Reports</div>
+                            <div class="text-xs text-gray-400 mt-1">Files: /lib/google-ads/client.ts, /api/google-ads/*</div>
+                        </div>
+                        <div class="p-4 border border-pink-200 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-pink-800">AssemblyAI Voice</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-3">recordrtc</td><td>^5.6.2</td></tr>
+                            </table>
+                            <div class="text-xs text-gray-500 mt-2">Real-time STT via WebSocket (~300ms latency)</div>
+                            <div class="text-xs text-gray-400 mt-1">Hook: useVoiceInput.ts, Token: /api/assemblyai-token</div>
+                        </div>
+                        <div class="p-4 border border-gray-200 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-gray-800">Web Scraping</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-3">apify-client</td><td>^2.17.0</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">cheerio</td><td>^1.1.2</td></tr>
+                            </table>
+                            <div class="text-xs text-gray-500 mt-2">URL crawling for knowledge base ingestion</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UI Component Libraries -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-purple-50 to-white">
+                    <h3 class="text-lg font-bold text-purple-800">UI Components (39 shadcn/ui + 17 Radix)</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-3 text-purple-700">Radix UI Primitives (17 packages)</h4>
+                            <div class="grid grid-cols-2 gap-1 text-xs font-mono">
+                                <div>@radix-ui/react-accordion</div>
+                                <div>@radix-ui/react-alert-dialog</div>
+                                <div>@radix-ui/react-avatar</div>
+                                <div>@radix-ui/react-checkbox</div>
+                                <div>@radix-ui/react-dialog</div>
+                                <div>@radix-ui/react-dropdown-menu</div>
+                                <div>@radix-ui/react-label</div>
+                                <div>@radix-ui/react-navigation-menu</div>
+                                <div>@radix-ui/react-popover</div>
+                                <div>@radix-ui/react-progress</div>
+                                <div>@radix-ui/react-radio-group</div>
+                                <div>@radix-ui/react-scroll-area</div>
+                                <div>@radix-ui/react-select</div>
+                                <div>@radix-ui/react-separator</div>
+                                <div>@radix-ui/react-slot</div>
+                                <div>@radix-ui/react-switch</div>
+                                <div>@radix-ui/react-tabs</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3 text-cyan-700">Styling & Animation</h4>
+                            <table class="text-sm">
+                                <tr><td class="font-mono py-1 pr-4">tailwindcss</td><td>^4</td><td class="text-gray-500">Utility-first CSS framework</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">tailwindcss-animate</td><td>^1.0.7</td><td class="text-gray-500">Animation utilities</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">class-variance-authority</td><td>^0.7.1</td><td class="text-gray-500">Component variant management</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">clsx + tailwind-merge</td><td>^2.1.1</td><td class="text-gray-500">Conditional class utilities</td></tr>
+                                <tr><td class="font-mono py-1 pr-4">lucide-react</td><td>^0.523.0</td><td class="text-gray-500">500+ SVG icons</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- State & Forms -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-green-50 to-white">
+                    <h3 class="text-lg font-bold text-green-800">State Management & Forms</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2">Zustand ^5.0.8</h4>
+                            <p class="text-xs text-gray-500 mb-2">Lightweight global state</p>
+                            <div class="text-xs bg-gray-100 p-2 rounded">
+                                <div class="font-mono">chat-store.ts:</div>
+                                <ul class="mt-1 space-y-1">
+                                    <li>• defaultModel</li>
+                                    <li>• conversations[]</li>
+                                    <li>• activeConversationId</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">React Hook Form ^7.58.1</h4>
+                            <p class="text-xs text-gray-500 mb-2">Performant form handling</p>
+                            <div class="text-xs bg-gray-100 p-2 rounded">
+                                <div class="font-mono">With validators:</div>
+                                <ul class="mt-1 space-y-1">
+                                    <li>• @hookform/resolvers</li>
+                                    <li>• zod ^3.25.67</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2">React Contexts (4)</h4>
+                            <ul class="text-xs space-y-1">
+                                <li><strong>AuthContext</strong> - User session, auth state</li>
+                                <li><strong>BusinessContext</strong> - Company profile data</li>
+                                <li><strong>NavigationContext</strong> - Sidebar state</li>
+                                <li><strong>CopywriterContext</strong> - AI agent selection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Markdown & Rich Text -->
+            <div class="card mb-8">
+                <div class="section-header">
+                    <h3 class="text-lg font-bold">Markdown & Rich Text Rendering</h3>
+                </div>
+                <div class="p-6">
+                    <table class="text-sm">
+                        <thead><tr><th>Package</th><th>Version</th><th>Purpose</th><th>Used In</th></tr></thead>
+                        <tbody>
+                            <tr><td class="font-mono">react-markdown</td><td>^10.1.0</td><td>Markdown renderer component</td><td class="text-xs text-gray-500">Chat messages, offer content</td></tr>
+                            <tr><td class="font-mono">marked</td><td>^16.3.0</td><td>Markdown parser to HTML</td><td class="text-xs text-gray-500">Server-side rendering</td></tr>
+                            <tr><td class="font-mono">remark-gfm</td><td>^4.0.1</td><td>GitHub Flavored Markdown</td><td class="text-xs text-gray-500">Tables, task lists, strikethrough</td></tr>
+                            <tr><td class="font-mono">rehype-raw</td><td>-</td><td>Raw HTML in markdown</td><td class="text-xs text-gray-500">Embedded HTML support</td></tr>
+                            <tr><td class="font-mono">react-syntax-highlighter</td><td>^16.1.0</td><td>Code block syntax coloring</td><td class="text-xs text-gray-500">Code snippets in chat</td></tr>
+                            <tr><td class="font-mono">isomorphic-dompurify</td><td>^2.28.0</td><td>XSS sanitization</td><td class="text-xs text-gray-500">User-generated content</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Utilities & Extras -->
+            <div class="card mb-8">
+                <div class="section-header">
+                    <h3 class="text-lg font-bold">Utilities & UI Extras</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm">Core Utils</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>lodash ^4.17.21</div>
+                                <div>date-fns ^4.1.0</div>
+                                <div>uuid ^11.1.0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm">UI Components</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>sonner ^2.0.7 (toasts)</div>
+                                <div>recharts ^3.2.1 (charts)</div>
+                                <div>react-day-picker ^9.10.0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm">Drag & Drop</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>@dnd-kit/core ^6.3.1</div>
+                                <div>@dnd-kit/sortable ^10.0.0</div>
+                                <div>@dnd-kit/utilities ^3.2.2</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm">Other</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>next-themes ^0.4.6</div>
+                                <div>@hookform/resolvers</div>
+                                <div>input-otp ^1.4.2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deployment & DevOps -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-emerald-50 to-white">
+                    <h3 class="text-lg font-bold text-emerald-800">Deployment & Infrastructure</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-semibold mb-3">Vercel Deployment</h4>
+                            <table class="text-sm">
+                                <tr><td class="py-1 text-gray-500 w-32">Primary URL</td><td class="font-medium">ai.adspend.com</td></tr>
+                                <tr><td class="py-1 text-gray-500">Vercel URL</td><td class="font-mono text-xs">adspend-ai.vercel.app</td></tr>
+                                <tr><td class="py-1 text-gray-500">Team</td><td>Adspend</td></tr>
+                                <tr><td class="py-1 text-gray-500">Region</td><td>iad1 (Washington D.C.)</td></tr>
+                                <tr><td class="py-1 text-gray-500">Node.js</td><td>22.x</td></tr>
+                                <tr><td class="py-1 text-gray-500">Framework</td><td>Next.js (auto-detected)</td></tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-3">Environment Variables (31)</h4>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-blue-500 rounded-full"></span>SUPABASE_* (3)</div>
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-full"></span>OPENAI_API_KEY</div>
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-full"></span>ANTHROPIC_API_KEY</div>
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-purple-500 rounded-full"></span>GOOGLE_AI_KEY</div>
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full"></span>STRIPE_* (4)</div>
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-cyan-500 rounded-full"></span>META_* (3)</div>
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-yellow-500 rounded-full"></span>GOOGLE_ADS_* (3)</div>
+                                <div class="flex items-center gap-1"><span class="w-2 h-2 bg-orange-500 rounded-full"></span>ASSEMBLYAI_KEY</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold mb-2 text-sm">Security Headers (vercel.json)</h4>
+                        <div class="text-xs font-mono space-y-1">
+                            <div>X-Content-Type-Options: nosniff</div>
+                            <div>X-Frame-Options: DENY</div>
+                            <div>X-XSS-Protection: 1; mode=block</div>
+                            <div>Referrer-Policy: strict-origin-when-cross-origin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database Schema (Supabase PostgreSQL) -->
+            <div class="card mb-8">
+                <div class="section-header bg-gradient-to-r from-cyan-50 to-white">
+                    <h3 class="text-lg font-bold text-cyan-800">Database Schema (PostgreSQL 17.6 + pgvector)</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-4 gap-4 mb-6">
+                        <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-cyan-800">62-71</div>
+                            <div class="text-xs text-cyan-700">Tables (Prod/Dev)</div>
+                        </div>
+                        <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-cyan-800">8</div>
+                            <div class="text-xs text-cyan-700">Schemas</div>
+                        </div>
+                        <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-cyan-800">1536</div>
+                            <div class="text-xs text-cyan-700">Vector Dims</div>
+                        </div>
+                        <div class="p-3 bg-cyan-100 rounded-lg text-center">
+                            <div class="text-2xl font-bold text-cyan-800">7</div>
+                            <div class="text-xs text-cyan-700">Extensions</div>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <h4 class="font-semibold mb-2 text-blue-600 text-sm">User & Auth (8)</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>auth.users, user_roles</div>
+                                <div>user_preferences, user_patterns</div>
+                                <div>user_meta_tokens, user_google_ads_tokens</div>
+                                <div>admin_impersonation_sessions</div>
+                                <div>onboarding_progress</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-purple-600 text-sm">Offers & Business (8)</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>business_offers (8P Framework)</div>
+                                <div>offer_versions, offer_files</div>
+                                <div>offer_file_embeddings</div>
+                                <div>offer_step_prompts</div>
+                                <div>subscriptions, subscription_plans</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-green-600 text-sm">AI Agents & Conversations (12)</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>ai_agents, agent_versions</div>
+                                <div>agent_performance, agent_training_documents</div>
+                                <div>conversations, messages</div>
+                                <div>conversation_summaries</div>
+                                <div>ai_models, ai_response_cache</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-orange-600 text-sm">Knowledge & RAG (15)</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>knowledge_base, knowledge_embeddings</div>
+                                <div>knowledge_collections, knowledge_collection_items</div>
+                                <div>knowledge_agent_assignments</div>
+                                <div>rag_query_cache, rag_response_cache</div>
+                                <div>scraping_jobs, embedding_events</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-red-600 text-sm">Usage & Analytics (10)</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>ai_usage_logs, ai_usage_quotas</div>
+                                <div>usage_analytics, historical_insights</div>
+                                <div>performance_metrics, embedding_metrics</div>
+                                <div>memory_compression_events</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-gray-600 text-sm">System & Admin (10)</h4>
+                            <div class="text-xs space-y-1 font-mono">
+                                <div>system_settings, system_alerts</div>
+                                <div>admin_notifications, error_reports</div>
+                                <div>meta_tokens, meta_sync_logs</div>
+                                <div>knowledge_upload_rate_limits</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-sm">Extensions Enabled</h4>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs">vector (pgvector)</span>
+                                <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">pg_graphql</span>
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs">pg_trgm</span>
+                                <span class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded text-xs">pgcrypto</span>
+                                <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs">supabase_vault</span>
+                                <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">uuid-ossp</span>
+                                <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">pg_stat_statements</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold mb-2 text-sm">Database Schemas</h4>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">public (62-71)</span>
+                                <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs">auth</span>
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded text-xs">storage</span>
+                                <span class="px-2 py-0.5 bg-orange-100 text-orange-800 rounded text-xs">realtime</span>
+                                <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs">vault</span>
+                                <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">graphql</span>
+                                <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">extensions</span>
+                                <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">supabase_migrations</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-cyan-50 rounded-lg border border-cyan-200">
+                        <h4 class="font-semibold mb-2 text-cyan-800 text-sm">Vector Search (Hybrid RAG)</h4>
+                        <div class="code-block text-xs">
+<span class="text-green-400">-- knowledge_embeddings uses both vector + tsvector for hybrid search</span>
+embedding vector(1536)  <span class="text-cyan-400">-- OpenAI text-embedding-ada-002</span>
+chunk_tsv tsvector      <span class="text-cyan-400">-- Full-text search</span>
+
+<span class="text-green-400">-- Cosine similarity search with threshold</span>
+WHERE 1 - (embedding &lt;=&gt; query_embedding) > 0.7
+ORDER BY embedding &lt;=&gt; query_embedding LIMIT 10;
+                        </div>
+                    </div>
+                    <p class="text-xs text-cyan-600 mt-3 text-center italic">See <a href="#" onclick="showTab('database', event)" class="underline font-semibold">Database tab</a> for full Production vs Development comparison</p>
+
+                    <!-- Table-to-Code Mapping -->
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <h4 class="font-semibold mb-3 text-gray-800 text-sm">Table-to-Code Mapping</h4>
+                        <div class="overflow-x-auto">
+                            <table class="text-xs w-full">
+                                <thead>
+                                    <tr class="bg-gray-100"><th class="text-left p-2">Table</th><th class="text-left p-2">API Routes</th><th class="text-left p-2">Services/Hooks</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-2"><code class="bg-purple-100 px-1 rounded">business_offers</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/offers/*, /api/business/offers/*</td>
+                                        <td class="p-2 text-gray-500">useOffers, offer-version.ts</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-2"><code class="bg-green-100 px-1 rounded">ai_agents</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/ai-agents/*</td>
+                                        <td class="p-2 text-gray-500">useAgents, agent-sync</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-2"><code class="bg-green-100 px-1 rounded">conversations</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/conversations/*, /api/chat/*</td>
+                                        <td class="p-2 text-gray-500">useConversations, conversations.service.ts</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-2"><code class="bg-orange-100 px-1 rounded">knowledge_base</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/knowledge/*</td>
+                                        <td class="p-2 text-gray-500">knowledge-rag-service.ts, batch-processor.ts</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-2"><code class="bg-orange-100 px-1 rounded">knowledge_embeddings</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/rag/search</td>
+                                        <td class="p-2 text-gray-500">rag-service.ts, embedding-service.ts, retriever.ts</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-2"><code class="bg-green-100 px-1 rounded">messages</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/conversations/[id]/messages</td>
+                                        <td class="p-2 text-gray-500">conversationContext.ts, chat-store.ts</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100">
+                                        <td class="p-2"><code class="bg-blue-100 px-1 rounded">subscriptions</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/billing/*, /api/webhooks/stripe</td>
+                                        <td class="p-2 text-gray-500">Stripe webhook handlers</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2"><code class="bg-orange-100 px-1 rounded">scraping_jobs</code></td>
+                                        <td class="p-2 font-mono text-gray-600">/api/content/scrape, /api/knowledge/crawl</td>
+                                        <td class="p-2 text-gray-500">Apify integration</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development & Testing -->
+            <div class="card">
+                <div class="section-header bg-gradient-to-r from-slate-50 to-white">
+                    <h3 class="text-lg font-bold text-slate-800">Development & Testing (24 packages)</h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm">Testing</h4>
+                            <table class="text-xs">
+                                <tr><td class="font-mono py-1 pr-3">vitest</td><td>^3.2.4</td><td class="text-gray-400">Unit tests</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">@playwright/test</td><td>^1.55.1</td><td class="text-gray-400">E2E tests</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">@testing-library/react</td><td>^16.3.0</td><td class="text-gray-400">Component tests</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">jest + jsdom</td><td>^30.2.0</td><td class="text-gray-400">DOM testing</td></tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm">Linting & Formatting</h4>
+                            <table class="text-xs">
+                                <tr><td class="font-mono py-1 pr-3">eslint</td><td>^9</td><td class="text-gray-400">Code linting</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">eslint-config-next</td><td>15.3.4</td><td class="text-gray-400">Next.js rules</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">prettier-plugin-tailwindcss</td><td>-</td><td class="text-gray-400">Class sorting</td></tr>
+                            </table>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm">Type Definitions</h4>
+                            <table class="text-xs">
+                                <tr><td class="font-mono py-1 pr-3">@types/node</td><td>^20</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">@types/react</td><td>^19</td></tr>
+                                <tr><td class="font-mono py-1 pr-3">@types/lodash</td><td>^4.17.20</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations Tab -->
+        <div id="recommendations" class="tab-content active">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Recommendations</h2>
+                <p class="text-gray-600">Prioritized action plan</p>
+            </div>
+
+            <!-- Priority 1: React2Shell Critical Vulnerability -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-red-700 to-red-900">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 1: React2Shell Critical Vulnerability (CVE-2025-55182)</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">IMMEDIATE</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            </svg>
+                            <div>
+                                <div class="font-bold text-red-800">Critical Remote Code Execution Vulnerability</div>
+                                <div class="text-sm text-red-700 mt-1">React2Shell enables unintended remote code execution in React Server Components when specially crafted requests are sent to affected systems. This is actively being exploited in the wild.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-bold text-gray-900 mb-2">CVE Identifiers</h4>
+                            <ul class="space-y-1 text-sm">
+                                <li><span class="font-mono bg-red-100 text-red-800 px-2 py-0.5 rounded">CVE-2025-55182</span> React 19</li>
+                                <li><span class="font-mono bg-red-100 text-red-800 px-2 py-0.5 rounded">CVE-2025-66478</span> Next.js</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-bold text-gray-900 mb-2">Affected Versions</h4>
+                            <ul class="space-y-1 text-sm text-gray-700">
+                                <li>• Next.js 15.0.0 - 16.0.6</li>
+                                <li>• Next.js 14 canary after 14.3.0-canary.76</li>
+                                <li>• react-server-dom-webpack</li>
+                                <li>• react-server-dom-turbopack</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                        <h4 class="font-bold text-amber-800 mb-2">Consequences if Unpatched</h4>
+                        <ul class="space-y-1 text-sm text-amber-900">
+                            <li>• <strong>Remote Code Execution:</strong> Attackers can execute arbitrary code on your Vercel server</li>
+                            <li>• <strong>Data Breach:</strong> Full access to environment variables, API keys, database credentials</li>
+                            <li>• <strong>System Compromise:</strong> Vercel advises to "assume your vulnerable systems are potentially compromised"</li>
+                            <li>• <strong>Lateral Movement:</strong> Attackers can pivot to connected services (Supabase, Stripe, Meta, etc.)</li>
+                            <li>• <strong>Financial Impact:</strong> Unauthorized charges via exposed Stripe keys, AI API abuse</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="font-bold text-gray-900 mb-3">Required Actions</h4>
+                    <div class="space-y-3">
+                        <div class="checklist-item">
+                            <div class="checklist-box"></div>
+                            <div>
+                                <div class="font-medium">Merge Vercel automated security PR</div>
+                                <div class="text-sm text-gray-500">
+                                    <a href="https://github.com/systemstoscale/adspend-ai/pull/79" target="_blank" rel="noopener" class="text-blue-600 hover:underline font-mono">PR #79: Fix React Server Components RCE vulnerability</a>
+                                    <span class="ml-2 px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs">Auto-generated by Vercel</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-box"></div>
+                            <div>
+                                <div class="font-medium">Verify package versions after merge</div>
+                                <div class="text-sm text-gray-500">Check package.json for Next.js ≥15.0.5, ≥15.1.9, or ≥15.2.6</div>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-box"></div>
+                            <div>
+                                <div class="font-medium">Enable Vercel Standard Protection</div>
+                                <div class="text-sm text-gray-500">Prevents unauthorized access to preview deployments</div>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-box"></div>
+                            <div>
+                                <div class="font-medium">Enable Vercel WAF filtering</div>
+                                <div class="text-sm text-gray-500">Provides temporary protection against known exploit patterns</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <div class="text-sm text-blue-800">
+                            <strong>Reference:</strong> <a href="https://vercel.com/kb/bulletin/react2shell" target="_blank" rel="noopener" class="underline hover:text-blue-600">https://vercel.com/kb/bulletin/react2shell</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 2: Other Security Issues -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-red-600 to-red-700">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 2: Additional Security Hardening</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">1-2 weeks</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-6">
+                        <!-- Item 1: Remove exposed keys -->
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                            <div class="flex items-start gap-3">
+                                <div class="checklist-box mt-1"></div>
+                                <div class="flex-1">
+                                    <div class="font-bold text-red-800">Remove ALL exposed API keys from .env.example</div>
+                                    <div class="text-sm text-gray-600 mt-1 mb-2">The following production keys are currently exposed in the repository:</div>
+                                    <div class="code-block text-xs mb-3">
+NEXT_PUBLIC_SUPABASE_URL=https://dfqzfykugnevxawkjxwg.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIs...
+SUPABASE_SERVICE_ROLE_KEY=sbp_4eaa2f8a...
+OPENAI_API_KEY=sk-proj-N2PiN_-Rkg8EY2yTxwQCo...
+ANTHROPIC_API_KEY=sk-ant-api03-nfumBDWswMY05Y3F...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_51LgORx...
+STRIPE_SECRET_KEY=sk_test_51LgORx...
+STRIPE_WEBHOOK_SECRET=whsec_9a3b026ee7de255f...
+META_APP_ID=1465619594588516
+META_APP_SECRET=d0598e364a70d39c6f30ff636a22e025
+ENCRYPTION_KEY=your-32-byte-hex-encryption-key...</div>
+                                    <div class="p-3 bg-amber-50 border border-amber-200 rounded">
+                                        <div class="font-semibold text-amber-800 text-sm">Why this matters:</div>
+                                        <ul class="text-sm text-amber-900 mt-1 space-y-1">
+                                            <li>• <strong>Financial Loss:</strong> Exposed Stripe keys allow unauthorized charges or refunds</li>
+                                            <li>• <strong>AI Cost Abuse:</strong> OpenAI/Anthropic keys can be used to run expensive model calls at your expense</li>
+                                            <li>• <strong>Data Breach:</strong> Supabase service role key bypasses RLS - full database access</li>
+                                            <li>• <strong>Account Takeover:</strong> Meta API credentials allow access to connected ad accounts</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Replace with placeholders -->
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="flex items-start gap-3">
+                                <div class="checklist-box mt-1"></div>
+                                <div class="flex-1">
+                                    <div class="font-bold text-gray-800">Replace .env.example secrets with placeholders</div>
+                                    <div class="text-sm text-gray-600 mt-1 mb-2">Use descriptive placeholder values instead of real credentials:</div>
+                                    <div class="code-block text-xs mb-3">
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+OPENAI_API_KEY=sk-your-openai-key
+ANTHROPIC_API_KEY=sk-ant-your-anthropic-key
+STRIPE_SECRET_KEY=sk_test_your-stripe-key
+META_APP_SECRET=your-meta-app-secret</div>
+                                    <div class="text-sm text-gray-500 font-mono">File: /.env.example</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Admin bypass -->
+                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="flex items-start gap-3">
+                                <div class="checklist-box mt-1"></div>
+                                <div class="flex-1">
+                                    <div class="font-bold text-yellow-800">Consider removing @adspend.com admin bypass</div>
+                                    <div class="text-sm text-gray-600 mt-1 mb-2">Currently, any verified @adspend.com email gets automatic admin access:</div>
+                                    <div class="code-block text-xs mb-3">
+<span class="text-gray-400">// /src/middleware.ts:59</span>
+if (user.email?.endsWith('@adspend.com')) {
+  return true; // Bypasses ALL permission checks
+}</div>
+                                    <div class="p-3 bg-green-50 border border-green-200 rounded">
+                                        <div class="font-semibold text-green-800 text-sm">Mitigating Factor:</div>
+                                        <div class="text-sm text-green-700">Email confirmation is required for signup - attackers cannot use fake @adspend.com emails without inbox access. However, a database-backed role system provides better audit trails and granular control.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Cookie security -->
+                        <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                            <div class="flex items-start gap-3">
+                                <div class="checklist-box mt-1"></div>
+                                <div class="flex-1">
+                                    <div class="font-bold text-orange-800">Add HttpOnly/Secure flags to cookies</div>
+                                    <div class="text-sm text-gray-600 mt-1 mb-2">Admin impersonation cookies lack critical security flags:</div>
+                                    <div class="p-3 bg-amber-50 border border-amber-200 rounded mb-2">
+                                        <div class="font-semibold text-amber-800 text-sm">Why this matters:</div>
+                                        <ul class="text-sm text-amber-900 mt-1 space-y-1">
+                                            <li>• <strong>XSS Token Theft:</strong> Without HttpOnly, JavaScript can steal session cookies</li>
+                                            <li>• <strong>Man-in-the-Middle:</strong> Without Secure flag, cookies transmit over HTTP</li>
+                                            <li>• <strong>Session Hijacking:</strong> Stolen admin cookies allow full account takeover</li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-sm text-gray-500 font-mono">File: /src/lib/supabase/server.ts</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 5: CSRF -->
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="flex items-start gap-3">
+                                <div class="checklist-box mt-1"></div>
+                                <div class="flex-1">
+                                    <div class="font-bold text-blue-800">Implement CSRF protection</div>
+                                    <div class="text-sm text-gray-600 mt-1 mb-2">State-changing operations lack CSRF tokens:</div>
+                                    <div class="p-3 bg-amber-50 border border-amber-200 rounded mb-2">
+                                        <div class="font-semibold text-amber-800 text-sm">Example Attack Scenario:</div>
+                                        <ul class="text-sm text-amber-900 mt-1 space-y-1">
+                                            <li>1. Attacker sends user a link to malicious page</li>
+                                            <li>2. Page contains hidden form posting to your API</li>
+                                            <li>3. User's browser sends request with their auth cookies</li>
+                                            <li>4. API processes request as if user initiated it</li>
+                                            <li>• <strong>Result:</strong> Attacker can change user's password, delete data, transfer funds</li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-sm text-gray-500">Affects: All mutation endpoints (POST, PUT, DELETE)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 3: Architecture & Tech Debt -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-orange-500 to-orange-600">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 3: Architecture & Tech Debt</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">2-4 weeks</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                            <div class="font-bold text-orange-800 mb-2">Consolidate duplicate Copywriter pages</div>
+                            <div class="text-sm text-gray-600 mb-2">Multiple implementations of the same feature cause maintenance burden and inconsistent UX:</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• <code class="bg-gray-100 px-1 rounded">/app/copywriter/</code> - Original implementation</li>
+                                <li>• <code class="bg-gray-100 px-1 rounded">/app/copywriter-v2/</code> - Refactored version</li>
+                                <li>• <strong>Impact:</strong> Bug fixes need to be applied twice, features diverge over time</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Complete v1/v2 offer system migration</div>
+                            <div class="text-sm text-gray-600 mb-2">The 8P Framework has two parallel implementations:</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• v1: Legacy offer structure with flat fields</li>
+                                <li>• v2: New JSONB-based structure with versioning</li>
+                                <li>• <strong>Risk:</strong> Data inconsistency between versions, complex queries</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Remove blocked routes (dead code in middleware)</div>
+                            <div class="text-sm text-gray-600">Middleware contains route blocking for paths that no longer exist - creates confusion and potential security blind spots.</div>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Implement API versioning</div>
+                            <div class="text-sm text-gray-600 mb-2">158 API routes with no versioning strategy:</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• <strong>Problem:</strong> Breaking changes affect all clients immediately</li>
+                                <li>• <strong>Solution:</strong> Add <code class="bg-gray-100 px-1 rounded">/api/v1/</code> prefix, maintain backward compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 4: Code Quality -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-yellow-500 to-yellow-600">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 4: Code Quality</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">Ongoing</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
+                            <div class="font-bold text-red-800 mb-2">Re-enable TypeScript checks in build</div>
+                            <div class="text-sm text-gray-600 mb-2">TypeScript strict mode is disabled in next.config.ts:</div>
+                            <div class="code-block text-xs mb-2">typescript: { ignoreBuildErrors: true }</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• <strong>Risk:</strong> Type errors slip into production undetected</li>
+                                <li>• <strong>Impact:</strong> Runtime crashes, undefined behavior, harder debugging</li>
+                                <li>• <strong>Fix:</strong> Set to false, fix all type errors before deploying</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Increase test coverage (15 suites currently)</div>
+                            <div class="text-sm text-gray-600 mb-2">Current testing stack: Vitest + Playwright + Testing Library</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• 500+ TypeScript files with only 15 test suites</li>
+                                <li>• Critical paths (auth, payments, AI) need integration tests</li>
+                                <li>• <strong>Target:</strong> 80% coverage on business logic</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Consolidate 60+ docs files in /docs</div>
+                            <div class="text-sm text-gray-600">Large documentation folder with outdated and redundant files. Consolidate into structured README files per feature.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 5: Performance -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-blue-500 to-blue-600">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 5: Performance Optimization</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">4-8 weeks</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="font-bold text-blue-800 mb-2">Add Redis caching layer</div>
+                            <div class="text-sm text-gray-600 mb-2">Currently no caching for expensive operations:</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• AI response caching (exists in DB but slow)</li>
+                                <li>• User session data fetched on every request</li>
+                                <li>• <strong>Solution:</strong> Vercel KV (Redis) for sub-millisecond reads</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Optimize pgvector search</div>
+                            <div class="text-sm text-gray-600 mb-2">1536-dimension vectors in knowledge_embeddings:</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Add HNSW index for faster approximate nearest neighbor</li>
+                                <li>• Consider dimensionality reduction for large datasets</li>
+                                <li>• Implement query result caching</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Review database indexes</div>
+                            <div class="text-sm text-gray-600">63 tables in public schema - audit frequently queried columns for missing indexes. Use pg_stat_statements to identify slow queries.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 6: Modernization -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-purple-500 to-purple-600">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 6: Next.js Modernization</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">Future</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                            <div class="font-bold text-purple-800 mb-2">Increase React Server Components usage</div>
+                            <div class="text-sm text-gray-600 mb-2">Many pages still use client-side rendering when server rendering would be more efficient:</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• <strong>Benefit:</strong> Reduced JavaScript bundle, faster initial load</li>
+                                <li>• <strong>Target:</strong> Dashboard, settings, and static pages</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Adopt Server Actions</div>
+                            <div class="text-sm text-gray-600 mb-2">Replace API routes with Server Actions where appropriate:</div>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>• Form submissions (offer creation, settings updates)</li>
+                                <li>• Simple mutations without complex validation</li>
+                                <li>• <strong>Benefit:</strong> Type-safe, no API boilerplate</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Implement Streaming UI</div>
+                            <div class="text-sm text-gray-600">Use Suspense boundaries and streaming for AI chat responses - show partial content as it generates rather than waiting for completion.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 7: Observability & Monitoring -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-pink-500 to-pink-600">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 7: Observability with Sentry.io</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">1-2 weeks</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4 p-4 bg-pink-50 border border-pink-200 rounded-lg">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-pink-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            <div>
+                                <div class="font-bold text-pink-800">Implement Sentry.io for Error Tracking & Performance Monitoring</div>
+                                <div class="text-sm text-pink-700 mt-1">Currently no centralized error tracking - issues go unnoticed until users report them.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="font-bold text-gray-800 mb-2">Why Sentry.io?</div>
+                            <ul class="text-sm text-gray-700 space-y-2">
+                                <li>• <strong>Real-time Error Alerts:</strong> Get notified immediately when errors occur in production</li>
+                                <li>• <strong>Full Stack Traces:</strong> See exact line numbers, file paths, and variable values at time of error</li>
+                                <li>• <strong>User Context:</strong> Know which user experienced the error, their browser, device, and session</li>
+                                <li>• <strong>Release Tracking:</strong> Correlate errors with specific deployments to identify regressions</li>
+                                <li>• <strong>Performance Monitoring:</strong> Track slow API routes, database queries, and page loads</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="font-bold text-green-800 mb-2">Benefits for AdSpend AI</div>
+                            <ul class="text-sm text-green-700 space-y-2">
+                                <li>• <strong>AI API Failures:</strong> Catch OpenAI/Anthropic timeouts, rate limits, and malformed responses before users notice</li>
+                                <li>• <strong>Stripe Webhook Issues:</strong> Alert on failed payment processing, subscription errors, or webhook signature mismatches</li>
+                                <li>• <strong>Supabase Connection Issues:</strong> Detect database connection pool exhaustion or RLS policy violations</li>
+                                <li>• <strong>Meta API Errors:</strong> Track ad sync failures, token expirations, and rate limiting</li>
+                                <li>• <strong>RAG Pipeline Failures:</strong> Monitor embedding generation errors, vector search timeouts, and chunking issues</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="font-bold text-blue-800 mb-2">Implementation Example</div>
+                            <div class="code-block text-xs mb-2">
+<span class="text-gray-400">// Install: npm install @sentry/nextjs</span>
+
+<span class="text-gray-400">// sentry.client.config.ts</span>
+import * as Sentry from "@sentry/nextjs";
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  environment: process.env.NODE_ENV,
+  tracesSampleRate: 1.0,
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+  integrations: [
+    Sentry.replayIntegration(),
+  ],
+});
+
+<span class="text-gray-400">// Usage in API routes:</span>
+try {
+  const response = await openai.chat.completions.create({...});
+} catch (error) {
+  Sentry.captureException(error, {
+    tags: { provider: 'openai', feature: 'copywriter' },
+    extra: { userId, model, promptLength }
+  });
+  throw error;
+}</div>
+                        </div>
+
+                        <div class="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                            <div class="font-bold text-amber-800 mb-2">Key Metrics to Track</div>
+                            <ul class="text-sm text-amber-900 space-y-1">
+                                <li>• <strong>Error Rate:</strong> Errors per 1000 requests (target: &lt;1%)</li>
+                                <li>• <strong>P95 Latency:</strong> 95th percentile response time (target: &lt;3s for AI, &lt;500ms for CRUD)</li>
+                                <li>• <strong>Apdex Score:</strong> User satisfaction index (target: &gt;0.9)</li>
+                                <li>• <strong>LCP:</strong> Largest Contentful Paint (target: &lt;2.5s)</li>
+                                <li>• <strong>Session Replays:</strong> Record user sessions leading to errors for debugging</li>
+                            </ul>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div class="p-3 bg-gray-100 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-gray-800">Free</div>
+                                <div class="text-xs text-gray-500">5K errors/month</div>
+                            </div>
+                            <div class="p-3 bg-gray-100 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-gray-800">$26/mo</div>
+                                <div class="text-xs text-gray-500">50K errors + performance</div>
+                            </div>
+                            <div class="p-3 bg-gray-100 rounded-lg text-center">
+                                <div class="text-2xl font-bold text-gray-800">$80/mo</div>
+                                <div class="text-xs text-gray-500">100K + session replay</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 8: Client Bug Fixes -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-amber-500 to-amber-600">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 8: Client-Reported Bug Fixes</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">PLACEHOLDER</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <div class="font-bold text-amber-800">Tracking Client-Reported Issues</div>
+                                <div class="text-sm text-amber-700 mt-1">This section will be populated with bugs reported by users and clients during testing and production use.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg border-dashed">
+                            <div class="text-center text-gray-500">
+                                <div class="font-semibold mb-1">No bugs reported yet</div>
+                                <div class="text-sm">Bug reports will be added here as they are received from client testing.</div>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="text-sm text-blue-800">
+                                <strong>Bug Tracking Process:</strong> Bugs should include: description, reproduction steps, expected vs actual behavior, affected user(s), severity level, and any screenshots/videos.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority 9: Framework Upgrade -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-indigo-500 to-indigo-600">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Priority 9: Next.js & React Version Upgrade</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">Future</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            <div>
+                                <div class="font-bold text-indigo-800">Upgrade to Latest Stable Versions</div>
+                                <div class="text-sm text-indigo-700 mt-1">Current: Next.js 15.5.4, React 19.0.0 - Keep pace with framework improvements and security patches.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-bold text-gray-900 mb-2">Current Versions</h4>
+                            <table class="text-sm w-full">
+                                <tr><td class="py-1 text-gray-600">Next.js</td><td class="font-mono">^15.5.4</td></tr>
+                                <tr><td class="py-1 text-gray-600">React</td><td class="font-mono">^19.0.0</td></tr>
+                                <tr><td class="py-1 text-gray-600">TypeScript</td><td class="font-mono">^5</td></tr>
+                                <tr><td class="py-1 text-gray-600">Tailwind</td><td class="font-mono">^4</td></tr>
+                            </table>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-bold text-green-800 mb-2">Why Upgrade Regularly?</h4>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li>• Security vulnerability patches</li>
+                                <li>• Performance improvements</li>
+                                <li>• New features and APIs</li>
+                                <li>• Better developer experience</li>
+                                <li>• Ecosystem compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                            <div class="font-bold text-yellow-800 mb-2">Upgrade Considerations</div>
+                            <ul class="text-sm text-yellow-900 space-y-1">
+                                <li>• <strong>Breaking Changes:</strong> Review Next.js and React changelogs before upgrading - major versions may require code changes</li>
+                                <li>• <strong>Dependency Compatibility:</strong> Ensure @ai-sdk/*, @supabase/*, and other dependencies support new versions</li>
+                                <li>• <strong>Testing:</strong> Run full E2E test suite after upgrade to catch regressions</li>
+                                <li>• <strong>Staging First:</strong> Deploy to staging environment before production</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="font-bold text-blue-800 mb-2">Upgrade Command</div>
+                            <div class="code-block text-xs">
+<span class="text-gray-400"># Check for updates</span>
+npx npm-check-updates -u --target minor  <span class="text-green-400"># Safe minor updates</span>
+
+<span class="text-gray-400"># Manual upgrade for major versions</span>
+npm install next@latest react@latest react-dom@latest
+
+<span class="text-gray-400"># After upgrade - verify build and tests</span>
+npm run build && npm run test
+                            </div>
+                        </div>
+                        <div class="p-3 bg-purple-50 border border-purple-200 rounded-lg">
+                            <div class="text-sm text-purple-800">
+                                <strong>Recommended Cadence:</strong> Check for minor/patch updates monthly. Evaluate major version upgrades quarterly. Subscribe to Next.js and React release notes for critical security updates.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Security Vulnerabilities Reference -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-gray-600 to-gray-700">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Full Security Vulnerability Reference</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">27 Total</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <h4 class="font-bold text-orange-800 mb-3">High Severity (8 vulnerabilities)</h4>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">No CSRF Protection</div>
+                                <div class="text-xs text-orange-700">State-changing operations vulnerable to cross-site request forgery attacks</div>
+                            </div>
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">Zero Rate Limiting</div>
+                                <div class="text-xs text-orange-700">No Redis backing - unlimited API abuse, DoS, and credential stuffing possible</div>
+                            </div>
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">IDOR Vulnerabilities</div>
+                                <div class="text-xs text-orange-700">Offer/knowledge APIs don't verify resource ownership - users can access others' data</div>
+                            </div>
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">Admin API Exposes Secrets</div>
+                                <div class="text-xs text-orange-700">/api/admin/settings returns environment variables in response</div>
+                            </div>
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">SQL Injection Risk</div>
+                                <div class="text-xs text-orange-700">Dynamic query construction in search endpoints without parameterization</div>
+                            </div>
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">XSS in Rich Text</div>
+                                <div class="text-xs text-orange-700">Unsafe innerHTML rendering without DOMPurify sanitization</div>
+                            </div>
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">Insecure File Uploads</div>
+                                <div class="text-xs text-orange-700">No MIME type validation, path traversal possible via filename</div>
+                            </div>
+                            <div class="p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                                <div class="font-semibold text-orange-800 text-sm">Session Management</div>
+                                <div class="text-xs text-orange-700">No session timeout, no logout from all devices functionality</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h4 class="font-bold text-yellow-800 mb-3">Medium Severity (7 vulnerabilities)</h4>
+                        <div class="grid md:grid-cols-3 gap-2">
+                            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                                <span class="font-semibold">Weak password policies</span> - No complexity requirements
+                            </div>
+                            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                                <span class="font-semibold">Verbose error messages</span> - Stack traces exposed to users
+                            </div>
+                            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                                <span class="font-semibold">Vulnerable dependencies</span> - Outdated npm packages
+                            </div>
+                            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                                <span class="font-semibold">Missing CSP header</span> - No Content-Security-Policy
+                            </div>
+                            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                                <span class="font-semibold">No audit logging</span> - Admin actions not tracked
+                            </div>
+                            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                                <span class="font-semibold">Long JWT expiration</span> - Tokens valid too long
+                            </div>
+                            <div class="p-2 bg-yellow-50 border border-yellow-200 rounded text-xs">
+                                <span class="font-semibold">Missing email verification</span> - For sensitive actions
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-blue-800 mb-3">Low Severity (5 vulnerabilities)</h4>
+                        <div class="grid md:grid-cols-5 gap-2">
+                            <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-center">Missing SRI</div>
+                            <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-center">No account lockout</div>
+                            <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-center">SameSite cookies</div>
+                            <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-center">No security.txt</div>
+                            <div class="p-2 bg-blue-50 border border-blue-200 rounded text-xs text-center">Login rate limit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Known Bugs Section -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-red-600 to-red-800">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Bugs Found During Testing</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">3 Issues</span>
+                    </div>
+                </div>
+                <div class="p-6 space-y-4">
+                    <!-- BUG-001 -->
+                    <div class="vulnerability-card critical">
+                        <div class="flex items-start justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs bg-red-200 text-red-800 px-2 py-0.5 rounded">BUG-001</span>
+                                <span class="nav-badge severity-critical">CRITICAL</span>
+                            </div>
+                            <span class="text-xs text-gray-500">Dec 11, 2025</span>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Knowledge File Upload Bricks Browser & Causes UI Loop</h4>
+                        <p class="text-sm text-gray-700 mb-3">Multiple issues with knowledge file upload: 1) Browser freezes when selecting multiple files, only allows 1 txt. 2) Same issue occurs in Presenter Profile attachment button. 3) After uploading single file, UI enters infinite loop switching between 'adding knowledge' and 'showing items' states.</p>
+
+                        <!-- Screenshot: Switchback Knowledge folder showing 13 test files -->
+                        <div class="my-3 p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="text-xs text-gray-500 mb-2 font-medium">Test Files Used (13 files from Switchback Knowledge folder):</div>
+                            <div class="grid grid-cols-2 gap-1 text-xs text-gray-600 font-mono">
+                                <span>Gold Letters - All.txt (1.1MB)</span>
+                                <span>Switchback-Services-v2.0.md (11KB)</span>
+                                <span>Switched-On CEO Book.txt (244KB)</span>
+                                <span>Switchback Brain Movie - Transcript.txt (11KB)</span>
+                                <span>Switchback Vet - Onsite Foundation Training.pdf (3MB)</span>
+                                <span>Switchback Vet - Vet Clinic Culture Intro.pdf (3.3MB)</span>
+                                <span>Switchback Vet Essentials - Transcripts.txt (76KB)</span>
+                                <span>Switchback Diagrams v1.1.pdf (2.3MB)</span>
+                                <span>Foundation Course - Transcripts All.txt (391KB)</span>
+                                <span>Foundation Course - Learning Objectives.txt (12KB)</span>
+                                <span>Switchback Services.txt (12KB)</span>
+                                <span>Peer Support Transcripts - All.txt (110KB)</span>
+                            </div>
+                        </div>
+
+                        <div class="text-sm mb-2">
+                            <span class="font-medium text-gray-700">Area:</span> <span class="font-mono text-xs bg-gray-100 px-2 py-0.5 rounded">offers/knowledge-upload</span>
+                        </div>
+                        <div class="text-sm mb-2">
+                            <span class="font-medium text-gray-700">Likely Files:</span>
+                            <span class="font-mono text-xs">src/components/knowledge/, src/app/api/knowledge/upload/, src/hooks/useKnowledge</span>
+                        </div>
+                        <div class="p-2 bg-green-50 border border-green-200 rounded text-sm">
+                            <span class="font-medium text-green-800">Workaround:</span> Click 'Regenerate with AI' button - updates profile and stops the loop
+                        </div>
+                    </div>
+
+                    <!-- BUG-002 -->
+                    <div class="vulnerability-card high">
+                        <div class="flex items-start justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs bg-orange-200 text-orange-800 px-2 py-0.5 rounded">BUG-002</span>
+                                <span class="nav-badge severity-high">HIGH</span>
+                            </div>
+                            <span class="text-xs text-gray-500">Dec 11, 2025</span>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">White/Light Gray Text on White Background in Firefox - AI Brain</h4>
+                        <p class="text-sm text-gray-700 mb-3">In Firefox: 1) Prompt input box has white text on white background - invisible while typing. 2) Suggested Questions boxes show loading spinners with extremely faint light gray text - nearly invisible.</p>
+
+                        <!-- Screenshot description: Suggested Questions with faint gray text -->
+                        <div class="my-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                            <div class="text-xs text-orange-700 font-medium mb-1">Visual Issue Description:</div>
+                            <p class="text-xs text-gray-600">Screenshot showed 3 Suggested Questions cards with loading spinners. Text was extremely faint light gray (#e5e7eb or similar) on white background - nearly invisible contrast ratio. Expected: dark text (#374151 or similar) for proper readability.</p>
+                        </div>
+
+                        <div class="text-sm mb-2">
+                            <span class="font-medium text-gray-700">Browser:</span> <span class="px-2 py-0.5 bg-orange-100 text-orange-700 rounded text-xs">Firefox Only</span>
+                        </div>
+                        <div class="text-sm">
+                            <span class="font-medium text-gray-700">Likely Files:</span>
+                            <span class="font-mono text-xs">src/components/chat/, src/components/chat/SuggestedQuestions</span>
+                        </div>
+                    </div>
+
+                    <!-- BUG-003 -->
+                    <div class="vulnerability-card low">
+                        <div class="flex items-start justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs bg-blue-200 text-blue-800 px-2 py-0.5 rounded">BUG-003</span>
+                                <span class="nav-badge severity-low">LOW</span>
+                            </div>
+                            <span class="text-xs text-gray-500">Dec 11, 2025</span>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Scroll to Bottom Button Appears When No Scrolling Needed</h4>
+                        <p class="text-sm text-gray-700 mb-3">In Copywriter/AI Brain, the 'Scroll to bottom' button appears even when there is no content requiring scrolling. Button should only show when chat content exceeds viewport height.</p>
+
+                        <!-- Screenshot description: Scroll button visible with minimal content -->
+                        <div class="my-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <div class="text-xs text-blue-700 font-medium mb-1">Visual Issue Description:</div>
+                            <p class="text-xs text-gray-600">Screenshot showed Copywriter chat interface with only 1-2 messages visible. "Scroll to bottom" button was displayed at bottom of chat area despite no scrollable content. Button should only appear when scrollHeight > clientHeight.</p>
+                        </div>
+
+                        <div class="text-sm">
+                            <span class="font-medium text-gray-700">Likely Files:</span>
+                            <span class="font-mono text-xs">src/components/chat/ChatMessages, src/components/chat/ScrollButton</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhancement Requests Section -->
+            <div class="card mb-6">
+                <div class="section-header bg-gradient-to-r from-purple-600 to-purple-800">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Enhancement Requests</h3>
+                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">1 Request</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                        <div class="flex items-start justify-between mb-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs bg-purple-200 text-purple-800 px-2 py-0.5 rounded">ENH-001</span>
+                                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs font-medium">MEDIUM</span>
+                            </div>
+                            <span class="text-xs text-gray-500">Dec 11, 2025</span>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Add Pagination to User Management</h4>
+                        <p class="text-sm text-gray-700 mb-2">Admin user management page needs pagination for better performance and UX when user count grows.</p>
+                        <div class="text-sm">
+                            <span class="font-medium text-gray-700">Area:</span> <span class="font-mono text-xs bg-gray-100 px-2 py-0.5 rounded">admin/users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Changelog Tab -->
+        <div id="changelog" class="tab-content">
+            <!-- Report Changes Section -->
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Report Changes</h2>
+                <p class="text-gray-600">Updates and modifications to this analysis report</p>
+            </div>
+
+            <!-- Version 1.1 -->
+            <div class="card mb-8">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">Version 1.1 - December 11, 2025</h3>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Current</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-green-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/></svg>
+                            Added
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• <strong>Database tab</strong> - Comprehensive comparison of Production vs Dev Supabase databases</li>
+                            <li>• "Bugs Found During Testing" section added to Recommendations tab</li>
+                            <li>• Password protection for report access</li>
+                            <li>• Deployed to Vercel with authentication</li>
+                            <li>• Report Changes section in changelog</li>
+                        </ul>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-blue-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/></svg>
+                            Changed
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• Renamed "Known Bugs (User Reported)" → "Bugs Found During Testing"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+                            Removed
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• None</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Git Changelog Section -->
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Git Changelog</h2>
+                <p class="text-gray-600">150+ commits from October - December 2025</p>
+            </div>
+
+            <!-- December 2025 -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-emerald-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">December 2025</h3>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">Latest</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Replace Delphi iframe with script implementation for better microphone support</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Dec 1</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Explicit permissions-policy for Delphi and allow-presentation in sandbox</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Dec 1</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Scroll to pricing from hero button and adjust pricing badge spacing</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Dec 1</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Re-enable signups, add password auth, and update Brian iframe permissions</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Dec 1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- November 2025 - Week 4 -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">November 2025 - Week 4</h3>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Signup & Permissions</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Comprehensive signup restrictions across all entry points</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 24</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add signup feature flag and hide Get Started button</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 24</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- November 2025 - Week 2 (Image Upload, 6P Framework) -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">November 2025 - Week 2</h3>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">6P Framework Migration</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add image upload support with AI transcription and fix audio/video transcription</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 14</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Implement auto-save for offer content to persist linebreaks</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 14</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Grant full platform access to all @adspend.com users</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 13</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Migrate from 9P/12P to 6P framework and fix pricing validation</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 13</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add business_name field to offer creation and editing</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 13</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Convert Business Description freeform input to Rich Text Editor with voice support</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 13</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add visual missing fields indicator and improve validation UX</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 13</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Integrate live kie.ai and fal.ai API clients for real-time generation</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 11</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- November 2025 - Week 1 (Hybrid Pricing) -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-orange-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">November 2025 - Week 1</h3>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">Hybrid Pricing</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Implement hybrid pricing model foundation with Stripe setup</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 10</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add UI components for hybrid pricing</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 10</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Implement auto-naming for new conversations based on agent, offer, and first message</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 10</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Comprehensive UX improvements and auto-save implementation</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 10</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Simplify offer generation to 6P framework with full context</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 10</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Simplified offer system v2 with knowledge filtering fixes</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Nov 9</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- October 2025 - Week 5 (Gemini, Sidebar) -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-cyan-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">October 2025 - Week 5</h3>
+                        <span class="px-3 py-1 bg-cyan-100 text-cyan-700 rounded-full text-sm font-medium">Gemini Integration</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Always default to Claude Sonnet 4.5 for new conversations</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 31</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add Gemini 2.5 models integration with full Vercel AI SDK support</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 31</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add duplicate offer button and move actions inside dropdown</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 29</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Replace react-syntax-highlighter with simple code blocks</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 28</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Intelligent conversation sidebar behavior</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 27</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- October 2025 - Week 4 (Stripe Webhooks) -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">October 2025 - Week 4</h3>
+                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Stripe Webhooks</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Production-ready webhook configuration and documentation</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 27</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Wait for subscription sync before login to ensure immediate access</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 27</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Implement webhook handlers to save subscriptions to database</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 27</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Auto-create users on successful checkout and fix webhook</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 27</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add admin bypass for subscription-gated pages</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 26</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add text case transformation button to Rich Text Editor</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 26</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- October 2025 - Week 3 (Voice Recording, Admin) -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-red-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">October 2025 - Week 3</h3>
+                        <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">Voice Recording Fixes</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Access StereoAudioRecorder from RecordRTC.StereoAudioRecorder</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 24</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Ensure RecordRTC/StereoAudioRecorder loads before recording</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 24</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Wait for AssemblyAI Begin message before sending audio</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 24</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Ensure WebSocket connects before starting voice recording</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 24</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Critical production fixes for admin panel and race conditions</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 22</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add session timeout tracking for admin impersonation</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 21</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add admin impersonation and video popup features</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 21</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add Open Chat agent for anonymous users</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 20-21</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- October 2025 - Week 2 (Auth System) -->
+            <div class="card mb-6">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">October 2025 - Week 2-3</h3>
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium">Auth System Overhaul</span>
+                    </div>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Implement world-class authentication system with Supabase best practices</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 20</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Refactor AI streaming to use Vercel AI SDK best practices</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 19</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Critical production issues and project cleanup</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 19</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Critical Stripe webhook bug preventing user account creation</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 18</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Complete passwordless authentication with magic links</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 18</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Handle password reset links with hash-based auth flow</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 18</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Automatic login after subscription payment via magic link</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 18</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-medium mt-0.5">fix</span>
+                        <span class="text-sm text-gray-700">Resolve chunked cookie reassembly bug causing auth failures</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 17</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-medium mt-0.5">feat</span>
+                        <span class="text-sm text-gray-700">Add STEP 1-4 labels to guide users through AI copywriting workflow</span>
+                        <span class="text-xs text-gray-400 ml-auto whitespace-nowrap">Oct 17</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Summary -->
+            <div class="card">
+                <div class="p-4 border-b border-gray-200">
+                    <h3 class="font-bold">Commit Statistics</h3>
+                </div>
+                <div class="p-4">
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl font-bold text-green-600">62</div>
+                            <div class="text-sm text-gray-600">Features</div>
+                        </div>
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-600">88</div>
+                            <div class="text-sm text-gray-600">Bug Fixes</div>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-600">8</div>
+                            <div class="text-sm text-gray-600">Documentation</div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <div class="text-2xl font-bold text-gray-600">~3</div>
+                            <div class="text-sm text-gray-600">Months Active</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Tab -->
+        <div id="database" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Database Comparison</h2>
+                <p class="text-gray-600">Production vs Development Supabase databases - Schema and data analysis</p>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+                <div class="stat-card">
+                    <div class="stat-value text-red-600">60+</div>
+                    <div class="text-sm text-gray-600 font-medium">Tables in Code</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value text-red-600">10,886</div>
+                    <div class="text-sm text-gray-600 font-medium">Prod Messages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value text-red-600">9,013</div>
+                    <div class="text-sm text-gray-600 font-medium">Prod Embeddings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value text-red-600">5,506</div>
+                    <div class="text-sm text-gray-600 font-medium">AI Usage Logs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value text-red-600">1,916</div>
+                    <div class="text-sm text-gray-600 font-medium">Conversations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value text-green-600">40</div>
+                    <div class="text-sm text-gray-600 font-medium">Dev Seed Data</div>
+                </div>
+            </div>
+
+            <!-- Executive Summary -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div class="card">
+                    <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-white">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-1 bg-green-600 text-white text-xs font-bold rounded">PRODUCTION</span>
+                            <h3 class="text-lg font-bold text-gray-900">krbofzqmwawhwrsrixwy</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                62 tables total
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                Contains all live user data (130 users)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                Users in: auth.users + user_roles
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                Connected to: <strong>ai.adspend.com</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-1 bg-blue-600 text-white text-xs font-bold rounded">DEVELOPMENT</span>
+                            <h3 class="text-lg font-bold text-gray-900">dfqzfykugnevxawkjxwg</h3>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                71 tables total (+9 more)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                Empty data, ready for testing
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                Newer schema with ad platform features
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                Connected to: <strong>adspend-ai-dev.vercel.app</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Storage -->
+            <div class="card mb-8">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-white">
+                    <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+                        User Storage in Production
+                    </h3>
+                </div>
+                <div class="p-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-4 bg-purple-50 rounded-lg border border-purple-100">
+                            <h4 class="font-semibold text-purple-800 text-sm mb-3 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                                auth.users (Supabase Managed)
+                            </h4>
+                            <p class="text-xs text-purple-700 mb-2">Primary user table managed by Supabase Auth:</p>
+                            <ul class="text-xs text-purple-600 space-y-1">
+                                <li>• <code class="bg-purple-100 px-1 rounded">id</code> - UUID primary key</li>
+                                <li>• <code class="bg-purple-100 px-1 rounded">email</code> - User email address</li>
+                                <li>• <code class="bg-purple-100 px-1 rounded">created_at</code> - Registration date</li>
+                                <li>• <code class="bg-purple-100 px-1 rounded">last_sign_in_at</code> - Last login</li>
+                                <li>• <code class="bg-purple-100 px-1 rounded">raw_user_meta_data</code> - Name, avatar, etc.</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg border border-green-100">
+                            <h4 class="font-semibold text-green-800 text-sm mb-3 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                user_roles (130 entries in Prod)
+                            </h4>
+                            <p class="text-xs text-green-700 mb-2">Role assignments for access control:</p>
+                            <ul class="text-xs text-green-600 space-y-1">
+                                <li>• <code class="bg-green-100 px-1 rounded">user_id</code> - FK to auth.users</li>
+                                <li>• <code class="bg-green-100 px-1 rounded">role</code> - Role name (admin, user, etc.)</li>
+                            </ul>
+                            <p class="text-xs text-green-600 mt-3 italic">All user tables reference auth.users(id) as foreign key</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schema Differences -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- Production Only -->
+                <div class="card">
+                    <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-green-50 to-white">
+                        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">DIFF</span>
+                            Tables in Production, Not in Development (8)
+                        </h3>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="p-3 bg-green-50 rounded-lg border border-green-100">
+                            <h4 class="font-semibold text-green-800 text-sm mb-2">AI Monitoring</h4>
+                            <ul class="text-xs text-green-700 space-y-1">
+                                <li>• ai_provider_health</li>
+                                <li>• ai_usage_quotas</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded-lg border border-green-100">
+                            <h4 class="font-semibold text-green-800 text-sm mb-2">System Monitoring</h4>
+                            <ul class="text-xs text-green-700 space-y-1">
+                                <li>• error_reports</li>
+                                <li>• system_alerts</li>
+                                <li>• system_health_metrics</li>
+                                <li>• performance_metrics</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-green-50 rounded-lg border border-green-100">
+                            <h4 class="font-semibold text-green-800 text-sm mb-2">Analytics</h4>
+                            <ul class="text-xs text-green-700 space-y-1">
+                                <li>• usage_analytics</li>
+                                <li>• knowledge_proof_summaries</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dev Only -->
+                <div class="card">
+                    <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white">
+                        <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded">DIFF</span>
+                            Tables in Development, Not in Production (19)
+                        </h3>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                            <h4 class="font-semibold text-blue-800 text-sm mb-2">User Management</h4>
+                            <ul class="text-xs text-blue-700 space-y-1">
+                                <li>• profiles</li>
+                                <li>• tenants</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                            <h4 class="font-semibold text-blue-800 text-sm mb-2">Ad Platform (New Feature)</h4>
+                            <ul class="text-xs text-blue-700 space-y-1">
+                                <li>• ads, ad_sets, campaigns</li>
+                                <li>• ad_metrics, ad_metrics_daily, ad_metrics_hourly</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                            <h4 class="font-semibold text-blue-800 text-sm mb-2">Recommendation Engine</h4>
+                            <ul class="text-xs text-blue-700 space-y-1">
+                                <li>• recommendations, recommendation_rules</li>
+                                <li>• recommendation_analytics, recommendation_generation_logs</li>
+                            </ul>
+                        </div>
+                        <div class="p-3 bg-blue-50 rounded-lg border border-blue-100">
+                            <h4 class="font-semibold text-blue-800 text-sm mb-2">Credits System</h4>
+                            <ul class="text-xs text-blue-700 space-y-1">
+                                <li>• credits_ledger, user_credits, ai_generation_costs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Comparison Table -->
+            <div class="card mb-8">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-white">
+                    <h3 class="text-lg font-bold text-gray-900">Data Comparison - Row Counts</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="text-left py-3 px-4 font-semibold text-gray-700">Table Name</th>
+                                <th class="text-right py-3 px-4 font-semibold text-gray-700">Production</th>
+                                <th class="text-right py-3 px-4 font-semibold text-gray-700">Development</th>
+                                <th class="text-center py-3 px-4 font-semibold text-gray-700">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">messages</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">10,886</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">knowledge_embeddings</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">9,013</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">ai_usage_logs</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">5,506</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">conversations</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">1,916</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">knowledge_base</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">594</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">business_offers</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">296</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">subscriptions</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">129</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">ai_agents</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">15</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">offer_step_prompts</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">12</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">knowledge_agent_assignments</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">8</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">ai_models</td>
+                                <td class="py-3 px-4 text-right text-green-600 font-semibold">7</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">profiles</td>
+                                <td class="py-3 px-4 text-right text-gray-400">N/A</td>
+                                <td class="py-3 px-4 text-right text-blue-600 font-semibold">17</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-blue-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">user_types</td>
+                                <td class="py-3 px-4 text-right text-gray-400">0</td>
+                                <td class="py-3 px-4 text-right text-blue-600 font-semibold">17</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-blue-500 rounded-full inline-block"></span></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 font-medium text-gray-800">subscription_plans</td>
+                                <td class="py-3 px-4 text-right text-green-600">2</td>
+                                <td class="py-3 px-4 text-right text-blue-600 font-semibold">6</td>
+                                <td class="py-3 px-4 text-center"><span class="w-2 h-2 bg-yellow-500 rounded-full inline-block"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tables Referenced in Code -->
+            <div class="card mb-8">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-white">
+                    <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"/></svg>
+                        Tables Referenced in Code (60+)
+                    </h3>
+                    <p class="text-sm text-gray-500 mt-1">Based on Supabase .from() calls in src/</p>
+                </div>
+                <div class="p-4">
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-xs">
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">knowledge_base</span> <span class="text-gray-400">(48)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">business_offers</span> <span class="text-gray-400">(41)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">conversations</span> <span class="text-gray-400">(33)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">ai_agents</span> <span class="text-gray-400">(20)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">knowledge_processing_jobs</span> <span class="text-gray-400">(18)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">subscriptions</span> <span class="text-gray-400">(16)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">messages</span> <span class="text-gray-400">(15)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">generation_history</span> <span class="text-gray-400">(13)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">user_credits</span> <span class="text-gray-400">(10)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">agent_context_sources</span> <span class="text-gray-400">(10)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">campaigns</span> <span class="text-gray-400">(9)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">performance_metrics</span> <span class="text-gray-400">(9)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">ai_models</span> <span class="text-gray-400">(9)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">recommendations</span> <span class="text-gray-400">(8)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">knowledge_embeddings</span> <span class="text-gray-400">(8)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">knowledge_collections</span> <span class="text-gray-400">(8)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">user_roles</span> <span class="text-gray-400">(8)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">ai_response_cache</span> <span class="text-gray-400">(8)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">conversation_summaries</span> <span class="text-gray-400">(8)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">ai_usage_logs</span> <span class="text-gray-400">(7)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">subscription_plans</span> <span class="text-gray-400">(7)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">business_profiles</span> <span class="text-gray-400">(7)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">offer_files</span> <span class="text-gray-400">(6)</span></div>
+                        <div class="p-2 bg-gray-50 rounded"><span class="font-mono text-gray-700">agent_versions</span> <span class="text-gray-400">(6)</span></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3 text-center">+ 36 more tables (ads, ad_sets, ad_metrics, profiles, tenants, credits_ledger, etc.)</p>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="card mb-8">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-amber-50 to-white">
+                    <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                        Recommendations
+                    </h3>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start p-3 bg-amber-50 rounded-lg border border-amber-200">
+                        <span class="text-amber-600 mr-3 font-bold">1.</span>
+                        <div>
+                            <h4 class="font-semibold text-amber-800 text-sm">Sync Schema Changes</h4>
+                            <p class="text-xs text-amber-700 mt-1">Dev has 19 new tables (ad platform, recommendations, credits). Migrate to production when features are ready.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-3 bg-amber-50 rounded-lg border border-amber-200">
+                        <span class="text-amber-600 mr-3 font-bold">2.</span>
+                        <div>
+                            <h4 class="font-semibold text-amber-800 text-sm">Add Monitoring to Dev</h4>
+                            <p class="text-xs text-amber-700 mt-1">Production has monitoring tables (error_reports, system_alerts). Add to dev for testing.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-3 bg-amber-50 rounded-lg border border-amber-200">
+                        <span class="text-amber-600 mr-3 font-bold">3.</span>
+                        <div>
+                            <h4 class="font-semibold text-amber-800 text-sm">Seed Dev Data</h4>
+                            <p class="text-xs text-amber-700 mt-1">Dev is empty except profiles/user_types. Seed with test data for ai_agents, offers, etc.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-3 bg-blue-50 rounded-lg border border-blue-200">
+                        <span class="text-blue-600 mr-3 font-bold">4.</span>
+                        <div>
+                            <h4 class="font-semibold text-blue-800 text-sm">Profiles Table Missing in Prod</h4>
+                            <p class="text-xs text-blue-700 mt-1">Dev has <code class="bg-blue-100 px-1 rounded">profiles</code> table (17 rows) but production doesn't. May need migration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Connection Details -->
+            <div class="card">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-slate-50 to-white">
+                    <h3 class="text-lg font-bold text-gray-900">Connection Details</h3>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 p-4">
+                    <div class="p-4 bg-slate-50 rounded-lg">
+                        <h4 class="font-semibold text-green-700 mb-3 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                            Production
+                        </h4>
+                        <dl class="text-xs space-y-2">
+                            <div class="flex justify-between">
+                                <dt class="text-gray-600">Supabase Project:</dt>
+                                <dd class="font-mono text-gray-800">krbofzqmwawhwrsrixwy</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-600">Vercel Project:</dt>
+                                <dd class="text-gray-800">adspend-ai</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-600">Domain:</dt>
+                                <dd class="text-gray-800 font-semibold">ai.adspend.com</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-lg">
+                        <h4 class="font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                            Development
+                        </h4>
+                        <dl class="text-xs space-y-2">
+                            <div class="flex justify-between">
+                                <dt class="text-gray-600">Supabase Project:</dt>
+                                <dd class="font-mono text-gray-800">dfqzfykugnevxawkjxwg</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-600">Vercel Project:</dt>
+                                <dd class="text-gray-800">adspend-ai-dev</dd>
+                            </div>
+                            <div class="flex justify-between">
+                                <dt class="text-gray-600">Domain:</dt>
+                                <dd class="text-gray-800 font-semibold">adspend-ai-dev.vercel.app</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+                <div class="px-4 pb-4">
+                    <p class="text-xs text-gray-500 text-center">Last updated: December 11, 2025</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#111111] mt-12 py-4"></footer>
+
+    <script>
+        function showTab(tabId, e) {
+            // Prevent default anchor behavior
+            if (e) e.preventDefault();
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('nav-item-active');
+            });
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            // Add active to clicked nav item
+            event.target.classList.add('nav-item-active');
+            // Close mobile menu after selection
+            document.querySelector('.nav-container').classList.remove('mobile-open');
+            // Scroll to top of content area
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="icon" type="image/png" href="https://www.adspend.com/hosted/images/96/356079cdde47be9cea3d6bc7d91ce1/Adspend-logo-transparent-black-background_1.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 50%, #111111 100%);
+            min-height: 100vh;
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(220, 15, 15, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .input-field {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+        .input-field:focus {
+            border-color: #dc0f0f;
+            box-shadow: 0 0 0 3px rgba(220, 15, 15, 0.1);
+            outline: none;
+        }
+        .login-btn {
+            background: linear-gradient(135deg, #dc0f0f 0%, #b30000 100%);
+            transition: all 0.2s;
+        }
+        .login-btn:hover {
+            background: linear-gradient(135deg, #ff1a1a 0%, #dc0f0f 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(220, 15, 15, 0.3);
+        }
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .glow {
+            box-shadow: 0 0 60px rgba(220, 15, 15, 0.15);
+        }
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <img src="https://www.adspend.com/hosted/images/96/356079cdde47be9cea3d6bc7d91ce1/Adspend-logo-transparent-black-background_1.png"
+                 alt="AdSpend"
+                 class="h-20 mx-auto mb-6">
+        </div>
+
+        <!-- Login Card -->
+        <div class="login-card rounded-2xl p-8 glow">
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           required
+                           autocomplete="username"
+                           class="input-field w-full px-4 py-3 rounded-lg text-white placeholder-gray-500"
+                           placeholder="Enter username">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           required
+                           autocomplete="current-password"
+                           class="input-field w-full px-4 py-3 rounded-lg text-white placeholder-gray-500"
+                           placeholder="Enter password">
+                </div>
+
+                <div id="errorMessage" class="hidden p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm text-center">
+                    Invalid credentials
+                </div>
+
+                <button type="submit" id="submitBtn"
+                        class="login-btn w-full py-3 px-4 rounded-lg text-white font-semibold text-lg flex items-center justify-center">
+                    <span id="btnText">Sign In</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span>Signing in...';
+            errorMessage.classList.add('hidden');
+
+            const credentials = btoa(username + ':' + password);
+
+            try {
+                const response = await fetch('/api/verify', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ credentials })
+                });
+
+                if (response.ok) {
+                    sessionStorage.setItem('reportAuth', credentials);
+                    window.location.href = '/api/report?t=' + Date.now();
+                } else {
+                    throw new Error('Invalid');
+                }
+            } catch (error) {
+                errorMessage.classList.remove('hidden');
+                document.getElementById('password').value = '';
+                submitBtn.disabled = false;
+                btnText.textContent = 'Sign In';
+            }
+        });
+
+        ['username', 'password'].forEach(id => {
+            document.getElementById(id).addEventListener('input', () => {
+                errorMessage.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
