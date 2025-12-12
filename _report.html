@@ -475,7 +475,7 @@
                 </div>
                 <div class="header-badges flex items-center gap-3">
                     <span class="px-2.5 py-1 bg-[#0769f5]/20 text-blue-300 rounded text-xs font-medium border border-[#0769f5]/40">v1.1.4</span>
-                    <span class="px-2.5 py-1 bg-gray-500/20 text-gray-300 rounded text-xs font-medium border border-gray-500/30">Dec 11, 2025</span>
+                    <span class="px-2.5 py-1 bg-gray-500/20 text-gray-300 rounded text-xs font-medium border border-gray-500/30">Dec 12, 2025</span>
                     <a href="/api/logout" class="px-2.5 py-1 bg-red-600/20 text-red-300 rounded text-xs font-medium border border-red-500/40 hover:bg-red-600/40 transition-colors cursor-pointer flex items-center gap-1">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
                         Logout
@@ -2077,10 +2077,7 @@ npm run build && npm run test
             <!-- Version 1.1 -->
             <div class="card mb-8">
                 <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-white">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-bold text-gray-900">Version 1.1 - December 11, 2025</h3>
-                        <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">Current</span>
-                    </div>
+                    <h3 class="text-lg font-bold text-gray-900">Version 1.1 - December 11, 2025</h3>
                 </div>
                 <div class="p-4">
                     <div class="mb-4">
@@ -2112,6 +2109,37 @@ npm run build && npm run test
                         </h4>
                         <ul class="space-y-1 text-sm text-gray-700 ml-6">
                             <li>• None</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Version 1.1.4 -->
+            <div class="card mb-8">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-emerald-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">Version 1.1.4 - December 12, 2025</h3>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">Current</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-blue-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/></svg>
+                            Changed
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• <strong>Mobile navigation</strong> - Fullscreen menu overlay with larger touch targets</li>
+                            <li>• <strong>Header layout</strong> - Version/date badges centered on mobile, logout moved to menu</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-red-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/></svg>
+                            Removed
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• <strong>Timeframe estimates</strong> - Removed arbitrary duration labels (e.g., "1-2 weeks") from priority sections. AI-assisted development doesn't follow traditional human timelines, making such estimates misleading and counterproductive.</li>
                         </ul>
                     </div>
                 </div>
