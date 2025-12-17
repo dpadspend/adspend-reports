@@ -2071,19 +2071,60 @@ npm run build && npm run test
 
         <!-- Changelog Tab -->
         <div id="changelog" class="tab-content">
-            <!-- Report Changes Section -->
+            <!-- General Updates Section -->
             <div class="mb-8">
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">Report Changes</h2>
-                <p class="text-gray-600">Updates and modifications to this analysis report</p>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">General Updates</h2>
+                <p class="text-gray-600">Platform updates, infrastructure changes, and development milestones</p>
+            </div>
+
+            <!-- Version 1.2 -->
+            <div class="card mb-8">
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-emerald-50 to-white">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-gray-900">Version 1.2 - December 16-17, 2025</h3>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">Current</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-red-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/></svg>
+                            Security
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• <strong>Critical: React Server Components RCE Fix (CVE-2024-56827)</strong> - Patched remote code execution vulnerability that could allow attackers to execute arbitrary code via poisoned JSX payloads. All production and development environments updated immediately.</li>
+                        </ul>
+                    </div>
+                    <div class="mb-4">
+                        <h4 class="font-semibold text-green-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/></svg>
+                            Added
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• <strong>Sentry Error Monitoring</strong> - Integrated Sentry.io with Session Replay, performance tracing, and global error boundary for comprehensive error tracking and debugging capabilities across all environments.</li>
+                            <li>• <strong>Specify Framework (SpecKit)</strong> - Installed and configured spec-driven development framework with constitution document and architecture guidelines. All future development follows structured specification workflow.</li>
+                            <li>• <strong>Development Database Clone</strong> - Cloned production Supabase database to isolated development environment, enabling safe testing and feature development without risk to production data.</li>
+                            <li>• <strong>Git Branching Workflow</strong> - Enforced branch-based development workflow. All changes now require feature branches with merge to main, preventing direct commits to production branch.</li>
+                            <li>• <strong>URL Tab Navigation</strong> - Report now supports direct linking to tabs via URL parameters (e.g., ?tab=changelog or ?changelog) for easier sharing and bookmarking.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-blue-700 mb-2 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                            Infrastructure
+                        </h4>
+                        <ul class="space-y-1 text-sm text-gray-700 ml-6">
+                            <li>• <strong>Report Repository Migration</strong> - Migrated status report to dedicated dpadspend/adspend-reports repository with automated Vercel deployments on push.</li>
+                            <li>• <strong>Dev Environment Connected</strong> - Development deployment now connected to cloned database for isolated testing environment.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- Version 1.1.4 -->
             <div class="card mb-8">
-                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-emerald-50 to-white">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-bold text-gray-900">Version 1.1.4 - December 12, 2025</h3>
-                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-medium">Current</span>
-                    </div>
+                <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+                    <h3 class="text-lg font-bold text-gray-900">Version 1.1.4 - December 12, 2025</h3>
                 </div>
                 <div class="p-4">
                     <div>
