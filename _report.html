@@ -2983,9 +2983,15 @@ npm run build && npm run test
     <footer class="bg-[#111111] mt-12 py-4"></footer>
 
     <script>
+        const validTabs = ['recommendations', 'techstack', 'database', 'changelog'];
+
         function showTab(tabId, e) {
             // Prevent default anchor behavior
             if (e) e.preventDefault();
+
+            // Validate tab exists
+            if (!validTabs.includes(tabId)) return;
+
             // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
@@ -2996,14 +3002,42 @@ npm run build && npm run test
             });
             // Show selected tab
             document.getElementById(tabId).classList.add('active');
-            // Add active to clicked nav item
-            event.target.classList.add('nav-item-active');
+            // Add active to clicked nav item (find by href)
+            const navItem = document.querySelector(`.nav-item[href="#${tabId}"]`);
+            if (navItem) navItem.classList.add('nav-item-active');
             // Close mobile menu after selection
             document.querySelector('.nav-container').classList.remove('mobile-open');
+            // Update URL with tab parameter
+            const url = new URL(window.location);
+            url.searchParams.set('tab', tabId);
+            window.history.replaceState({}, '', url);
             // Scroll to top of content area
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // On page load, check URL for tab parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            let tabToShow = null;
+
+            // Check for ?tab=changelog format
+            if (params.has('tab') && validTabs.includes(params.get('tab'))) {
+                tabToShow = params.get('tab');
+            }
+            // Check for ?changelog format (tab name as key with no value)
+            else {
+                for (const tab of validTabs) {
+                    if (params.has(tab)) {
+                        tabToShow = tab;
+                        break;
+                    }
+                }
+            }
+
+            if (tabToShow) {
+                showTab(tabToShow);
+            }
+        });
     </script>
 </body>
 </html>
