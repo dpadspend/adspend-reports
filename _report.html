@@ -505,7 +505,7 @@
             Database<span class="nav-badge" style="background: rgba(7,105,245,0.2); color: #60a5fa;">2</span>
         </a>
         <a href="#changelog" class="mobile-menu-item" onclick="showTab('changelog', event); document.getElementById('mobile-menu').classList.remove('mobile-open');">
-            Changelog<span class="nav-badge" style="background: rgba(8,169,17,0.2); color: #4ade80;">150+</span>
+            Changelog
         </a>
         <a href="/api/logout" class="mobile-menu-item" style="color: #ff6b6b; margin-top: 20px;">
             <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
@@ -536,7 +536,7 @@
             <div class="nav-divider"></div>
             <div class="nav-group">
                 <a href="#changelog" class="nav-item" onclick="showTab('changelog', event)">
-                    Changelog<span class="nav-badge" style="background: rgba(8,169,17,0.2); color: #4ade80;">150+</span>
+                    Changelog
                 </a>
             </div>
             <div class="nav-group mobile-logout">
@@ -1274,101 +1274,7 @@ ORDER BY embedding &lt;=&gt; query_embedding LIMIT 10;
                 <p class="text-gray-600">Prioritized action plan</p>
             </div>
 
-            <!-- Priority 1: React2Shell Critical Vulnerability -->
-            <div class="card mb-6">
-                <div class="section-header bg-gradient-to-r from-red-700 to-red-900">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-lg font-bold">Priority 1: React2Shell Critical Vulnerability (CVE-2025-55182)</h3>
-                        <span class="px-3 py-1 bg-white/20 rounded-full text-sm">IMMEDIATE</span>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                        <div class="flex items-start gap-3">
-                            <svg class="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                            </svg>
-                            <div>
-                                <div class="font-bold text-red-800">Critical Remote Code Execution Vulnerability</div>
-                                <div class="text-sm text-red-700 mt-1">React2Shell enables unintended remote code execution in React Server Components when specially crafted requests are sent to affected systems. This is actively being exploited in the wild.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-4 mb-4">
-                        <div class="p-4 bg-gray-50 rounded-lg">
-                            <h4 class="font-bold text-gray-900 mb-2">CVE Identifiers</h4>
-                            <ul class="space-y-1 text-sm">
-                                <li><span class="font-mono bg-red-100 text-red-800 px-2 py-0.5 rounded">CVE-2025-55182</span> React 19</li>
-                                <li><span class="font-mono bg-red-100 text-red-800 px-2 py-0.5 rounded">CVE-2025-66478</span> Next.js</li>
-                            </ul>
-                        </div>
-                        <div class="p-4 bg-gray-50 rounded-lg">
-                            <h4 class="font-bold text-gray-900 mb-2">Affected Versions</h4>
-                            <ul class="space-y-1 text-sm text-gray-700">
-                                <li>• Next.js 15.0.0 - 16.0.6</li>
-                                <li>• Next.js 14 canary after 14.3.0-canary.76</li>
-                                <li>• react-server-dom-webpack</li>
-                                <li>• react-server-dom-turbopack</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="mb-4 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                        <h4 class="font-bold text-amber-800 mb-2">Consequences if Unpatched</h4>
-                        <ul class="space-y-1 text-sm text-amber-900">
-                            <li>• <strong>Remote Code Execution:</strong> Attackers can execute arbitrary code on your Vercel server</li>
-                            <li>• <strong>Data Breach:</strong> Full access to environment variables, API keys, database credentials</li>
-                            <li>• <strong>System Compromise:</strong> Vercel advises to "assume your vulnerable systems are potentially compromised"</li>
-                            <li>• <strong>Lateral Movement:</strong> Attackers can pivot to connected services (Supabase, Stripe, Meta, etc.)</li>
-                            <li>• <strong>Financial Impact:</strong> Unauthorized charges via exposed Stripe keys, AI API abuse</li>
-                        </ul>
-                    </div>
-
-                    <h4 class="font-bold text-gray-900 mb-3">Required Actions</h4>
-                    <div class="space-y-3">
-                        <div class="checklist-item">
-                            <div class="checklist-box"></div>
-                            <div>
-                                <div class="font-medium">Merge Vercel automated security PR</div>
-                                <div class="text-sm text-gray-500">
-                                    <a href="https://github.com/systemstoscale/adspend-ai/pull/79" target="_blank" rel="noopener" class="text-blue-600 hover:underline font-mono">PR #79: Fix React Server Components RCE vulnerability</a>
-                                    <span class="ml-2 px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs">Auto-generated by Vercel</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-box"></div>
-                            <div>
-                                <div class="font-medium">Verify package versions after merge</div>
-                                <div class="text-sm text-gray-500">Check package.json for Next.js ≥15.0.5, ≥15.1.9, or ≥15.2.6</div>
-                            </div>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-box"></div>
-                            <div>
-                                <div class="font-medium">Enable Vercel Standard Protection</div>
-                                <div class="text-sm text-gray-500">Prevents unauthorized access to preview deployments</div>
-                            </div>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-box"></div>
-                            <div>
-                                <div class="font-medium">Enable Vercel WAF filtering</div>
-                                <div class="text-sm text-gray-500">Provides temporary protection against known exploit patterns</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                        <div class="text-sm text-blue-800">
-                            <strong>Reference:</strong> <a href="https://vercel.com/kb/bulletin/react2shell" target="_blank" rel="noopener" class="underline hover:text-blue-600">https://vercel.com/kb/bulletin/react2shell</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Priority 2: Other Security Issues -->
+            <!-- Priority 1: Other Security Issues -->
             <div class="card mb-6">
                 <div class="section-header bg-gradient-to-r from-red-600 to-red-700">
                     <h3 class="text-lg font-bold">Priority 2: Additional Security Hardening</h3>
@@ -2180,7 +2086,7 @@ npm run build && npm run test
             <!-- Git Changelog Section -->
             <div class="mb-8">
                 <h2 class="text-3xl font-bold text-gray-900 mb-2">Git Changelog</h2>
-                <p class="text-gray-600">150+ commits from October - December 2025</p>
+                <p class="text-gray-600">Commits from October - December 2025</p>
             </div>
 
             <!-- December 2025 -->
